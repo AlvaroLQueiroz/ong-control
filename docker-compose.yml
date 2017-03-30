@@ -1,0 +1,12 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  backend:
+    build: website/
+    volumes:
+      - ./website/:/code
+    ports:
+      - "80:80"
+    depends_on:
+      - db
