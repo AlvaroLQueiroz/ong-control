@@ -4,8 +4,10 @@ RUN apt-get update && apt-get upgrade
 RUN mkdir /code
 RUN touch ong.sock
 WORKDIR /code
-ADD ["requirements.txt", "website_nginx.conf", "website_uwsgi.ini", "./"]
+ADD ["start_server.sh", "requirements.txt", "website_nginx.conf", "website_uwsgi.ini", "./"]
 RUN pip install -r requirements.txt
 RUN apt-get install -y nginx && ln -s website_nginx.conf /etc/nginx/sites-enabled
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-CMD uwsgi --ini website_uwsgi.ini && /etc/init.d/nginx start
+RUN chmod +x start_server.sh
+EXPOSE 80
+ENTRYPOINT ["./start_server.sh"]
