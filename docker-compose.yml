@@ -1,12 +1,26 @@
 version: '2'
+networks: 
+  frontend:
+  backend:
+
 services:
   db:
+    restart: always
     image: postgres
-  backend:
-    build: website/
+    networks: 
+      - backend
+
+  api:
+    restart: always
+    build: ong_api/
     volumes:
-      - ./website/:/code
+      - ./ong_api/:/code
     ports:
       - "80:80"
     depends_on:
       - db
+    networks: 
+      - frontend
+      - backend
+    environment: 
+      - DJANGO_SETTINGS_MODULE=ong.dev_settings
