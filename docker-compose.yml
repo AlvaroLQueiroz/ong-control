@@ -1,26 +1,32 @@
 version: '2'
-networks: 
-  frontend:
-  backend:
 
 services:
   db:
     restart: always
     image: postgres
-    networks: 
-      - backend
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=ong-api-user
+      - POSTGRES_PASSWORD=ong-123
+      - POSTGRES_DB=ong-control
 
+  nginx:
+    restart: always
+    image: nginx
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./ong_api/api_nginx.conf:/etc/nginx/nginx.conf
+      - ./logs/nginx/:/logs/nginx
+      - ./ong_api/uwsgi_params:/tmp/uwsgi_params
   api:
     restart: always
     build: ong_api/
     volumes:
       - ./ong_api/:/code
-    ports:
-      - "80:80"
     depends_on:
       - db
-    networks: 
-      - frontend
-      - backend
+      - nginx
     environment: 
       - DJANGO_SETTINGS_MODULE=ong.dev_settings

@@ -1,4 +1,4 @@
-django==1.10
-psycopg2
-djangorestframework
-uwsgi
+django==1.11
+psycopg2==2.7
+djangorestframework==3.6
+uwsgi==2.0
