@@ -5,22 +5,11 @@ services:
     image: postgres
     env_file: ./config_files/env-dev
 
-  nginx:
-    image: nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./config_files/nginx-dev.conf:/etc/nginx/nginx.conf
-      - ./config_files/uwsgi-params-dev:/tmp/uwsgi_params
-      - ./ong_api/static/media/:/code/midia/
-      - ./ong_api/static/dist/:/code/static/
-      - ./logs/nginx/:/logs/nginx/
-    links:
-      - api
-
   api:
     build: ./ong_api
     env_file: ./config_files/env-dev
+    ports:
+      - "8000:8000"
     volumes:
       - ./ong_api/:/code/
       - ./logs/uwsgi/:/logs/uwsgi/

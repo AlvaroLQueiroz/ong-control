@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from location.validators import validate_zipcode
+from address.validators import validate_zipcode
 
 
 class Country(models.Model):
