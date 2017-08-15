@@ -1,4 +1,4 @@
-FROM python:3.5
+FROM python:3.6
 LABEL Version="1.0"
 RUN mkdir /code
 WORKDIR /code

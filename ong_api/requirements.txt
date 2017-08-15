@@ -1,5 +1,5 @@
 django==1.11
 psycopg2==2.7
-djangorestframework==3.6
+djangorestframework==3.6.1
 uwsgi==2.0
 ipython

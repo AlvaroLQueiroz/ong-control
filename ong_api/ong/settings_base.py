@@ -30,9 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'finance.core',
-    'finance.donation',
-    'finance.cash_flow',
+    'finance',
 
     'rest_framework',
 ]
