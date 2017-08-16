@@ -1,18 +1,28 @@
 from rest_framework import serializers
 
-from .models import Transaction, Wallet
+from .models import Transaction, TransactionCategory, Wallet
 
 
 class WalletSerializer(serializers.ModelSerializer):
+    balance = serializers.SerializerMethodField('calculate_balance')
+
     class Meta:
         model = Wallet
-        fields = ('id', 'user', 'active', 'created', 'description', 'label')
+        fields = ('id', 'active', 'agency', 'description', 'label', 'number', 'balance')
+
+    def calculate_balance(self, wallet):
+        return wallet.balance()
+
+class TransactionCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TransactionCategory
+        fields = ('id', 'active', 'description', 'label', 'needs_nf', 'transaction_type')
 
 
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('id', 'user', 'active', 'created', 'due_date', 'is_entry', 'value')
+        fields = ('id', 'active', 'description', 'done', 'due_date', 'value')
 
 
 class WalletRelatedSerializer(serializers.ModelSerializer):
@@ -20,12 +30,21 @@ class WalletRelatedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Wallet
-        fields = ('id', 'user', 'active', 'created', 'description', 'label', 'transactions')
+        fields = ('id', 'active', 'agency', 'description', 'label', 'number', 'transactions')
+
+
+class TransactionCategoryRelatedSerializer(serializers.ModelSerializer):
+    transactions = TransactionSerializer(many=True)
+
+    class Meta:
+        model = TransactionCategory
+        fields = ('id', 'active', 'description', 'label', 'needs_nf', 'transaction_type', 'transactions')
 
 
 class TransactionRelatedSerializer(serializers.ModelSerializer):
+    category = TransactionCategorySerializer()
     wallet = WalletSerializer()
 
     class Meta:
         model = Transaction
-        fields = ('id', 'user', 'wallet', 'active', 'created', 'due_date', 'is_entry', 'value')
+        fields = ('id', 'active', 'description', 'done', 'due_date', 'value', 'category', 'wallet')

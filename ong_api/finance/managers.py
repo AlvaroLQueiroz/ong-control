@@ -9,15 +9,3 @@ class WalletManager(models.Manager):
 
     def inactives(self):
         return self.get_queryset().filter(active=False)
-
-
-class TransactionManager(models.Manager):
-    def balance(self):
-        return self.get_queryset().aggregate(
-            total=Sum(
-                Case(
-                    When(active=True, category__transaction_type=TRANSACTION_INPUT, done=True, then=F('value')),
-                    When(active=True, category__transaction_type=TRANSACTION_OUTPUT, done=True, then=F('value') * -1)
-                )
-            )
-        )['total']
