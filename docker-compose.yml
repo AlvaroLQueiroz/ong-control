@@ -16,3 +16,15 @@ services:
       - ./config_files/uwsgi-dev.ini:/tmp/uwsgi-dev.ini
     links:
       - db
+
+  # webapp:
+  #   build: ./ong-webapp
+  #   env_file: ./config_files/env-dev
+  #   ports:
+  #     - 4200:4200
+  #     - 49152:49152
+  #   volumes:
+  #     - ./ong-webapp/:/code/
+  #     - ./logs/uwsgi/:/logs/uwsgi/
+  #   links:
+  #     - api

@@ -8,7 +8,7 @@ from django.db import models
 from django.db.models import Case, F, Sum, When
 from django.utils.translation import ugettext as _
 from finance import TRANSACTION_INPUT, TRANSACTION_OUTPUT
-from finance.managers import TransactionManager, WalletManager
+from finance.managers import WalletManager
 
 __all__ = [
     'PeriodicTransaction',
