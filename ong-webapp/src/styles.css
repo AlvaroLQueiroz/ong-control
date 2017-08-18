@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+header,
+main,
+footer {
+  padding-left: 300px;
+}
+nav{
+  width: calc(100% - 300px) !important;
+}
+@media only screen and (max-width: 992px) {
+  header,
+  main,
+  footer {
+    padding-left: 0;
+  }
+}
+
+#sidenav-overlay { z-index: 1 !important; }
