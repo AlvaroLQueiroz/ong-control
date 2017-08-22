@@ -1,12 +1,14 @@
-header,
-main,
-footer {
+header:not(.default),
+main:not(.default),
+footer:not(.default) {
   padding-left: 300px;
 }
-nav{
-  width: calc(100% - 300px) !important;
-}
+
 @media only screen and (max-width: 992px) {
+  nav{
+    width: calc(100% - 300px) !important;
+  }
+
   header,
   main,
   footer {
@@ -14,4 +16,8 @@ nav{
   }
 }
 
-#sidenav-overlay { z-index: 1 !important; }
+#sidenav-overlay { display: none !important; }
+
+.pointer{
+  cursor: pointer;
+}

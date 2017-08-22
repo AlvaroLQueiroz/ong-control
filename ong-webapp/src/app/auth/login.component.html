@@ -1,0 +1,32 @@
+<app-card [sizes]="'s12 m6 offset-m3'">
+  <span class="card-title blue-text center">Entrar</span>
+  <div class="card-body">
+    <div class="row">
+      <form class="col s12" #loginForm="ngForm">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="user" type="text" class="validate" name="username" required [(ngModel)]="user.username">
+            <label for="user">Usuário</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" class="validate" name="username" required [(ngModel)]="user.password">
+            <label for="password">Senha</label>
+          </div>
+        </div>
+        <div class="row" [hidden]="!hasError">
+          <div class="col s12 center red-text bold">
+            Usuário e/ou senha incorretos!
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="card-action center-align">
+    <button class="btn-flat waves-effect blue-text" type="button"
+      [disabled]="!loginForm.valid" (click)="submit()">Entrar</button>
+    <br>
+    <button class="btn-flat waves-effet orange-text"><small>Recuperar senha</small></button>
+  </div>
+</app-card>

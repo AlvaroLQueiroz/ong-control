@@ -1,3 +1,4 @@
+import { AuthService } from './../../auth/auth.service';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
 
@@ -10,12 +11,18 @@ export class NavbarComponent implements OnInit {
 
   sideNavActions = new EventEmitter<string|MaterializeAction>();
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
 
-  sideNavOpen(){
-    this.sideNavActions.emit({action:"sideNav", params:["show"]});
+  sideNavOpen() {
+    this.sideNavActions.emit({action: 'sideNav', params: ['show']});
+  }
+
+  logout(){
+    this.authService.logout();
   }
 }
