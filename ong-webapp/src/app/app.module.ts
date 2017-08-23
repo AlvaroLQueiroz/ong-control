@@ -1,26 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MaterializeCssModule } from './materialize-css/materialize-css.module';
+import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
-import { AuthGuard } from './auth/auth.guard';
 import { AppRoutingModule } from './app.routing.module';
+import { AuthGuard } from './auth/auth.guard';
 import { AuthModule } from './auth/auth.module';
+import { HomeComponent } from './core/home/home.component';
 import { ProfileModule } from './profile/profile.module';
-import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
   ],
   imports: [
-    BrowserModule,
-    MaterializeCssModule,
+    AppRoutingModule,
     AuthModule,
+    BrowserModule,
+    CoreModule,
     ProfileModule,
-    AppRoutingModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

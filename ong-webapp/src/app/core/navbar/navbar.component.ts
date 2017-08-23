@@ -1,4 +1,4 @@
-import { AuthService } from './../../auth/auth.service';
+import { AuthService } from './../../api/auth.service';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
 

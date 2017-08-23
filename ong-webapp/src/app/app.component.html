@@ -3,8 +3,10 @@
   <app-sidenav *ngIf="menuIsVisible"></app-sidenav>
 </header>
 <main [class.default]="!menuIsVisible">
-  <div class="row">
-    <router-outlet></router-outlet>
+  <div class="container">
+    <div class="row">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </main>
 <footer [class.default]="!menuIsVisible">

@@ -1,11 +1,11 @@
-import { MaterializeCssModule } from './../materialize-css/materialize-css.module';
+import { CoreModule } from './../core/core.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
     CommonModule,
-    MaterializeCssModule
+    CoreModule
   ],
   declarations: [],
   exports: []

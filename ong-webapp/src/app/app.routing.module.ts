@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth/auth.guard';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './auth/login.component';
+import { HomeComponent } from './core/home/home.component';
+import { LoginComponent } from './auth/login/login.component';
 
 const appRoutes: Routes = [
     {path: 'login',
@@ -13,6 +13,13 @@ const appRoutes: Routes = [
         component: HomeComponent,
         canActivate: [AuthGuard],
         canLoad: [AuthGuard]},
+    {path: 'wallets',
+        loadChildren: 'app/wallet/wallet.module#WalletModule',
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard]},
+    {path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'},
 ];
 
 @NgModule({

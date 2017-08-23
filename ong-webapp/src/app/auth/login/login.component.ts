@@ -1,7 +1,7 @@
+import { AuthService } from './../../api/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Login } from './login'
-import { AuthService } from './auth.service';
 import { Subscription } from 'rxjs/Rx';
 
 @Component({

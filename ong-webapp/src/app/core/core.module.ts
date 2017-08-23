@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { MaterializeModule } from 'angular2-materialize';
 import { NgModule } from '@angular/core';
@@ -10,9 +11,19 @@ import { CardComponent } from './card/card.component';
   imports: [
     CommonModule,
     MaterializeModule,
-    RouterModule
+    RouterModule,
   ],
-  declarations: [NavbarComponent, SidenavComponent, CardComponent],
-  exports: [NavbarComponent, SidenavComponent, CardComponent]
+  declarations: [
+    CardComponent,
+    HomeComponent,
+    NavbarComponent,
+    SidenavComponent,
+  ],
+  exports: [
+    CardComponent,
+    HomeComponent,
+    NavbarComponent,
+    SidenavComponent,
+  ]
 })
-export class MaterializeCssModule { }
+export class CoreModule { }

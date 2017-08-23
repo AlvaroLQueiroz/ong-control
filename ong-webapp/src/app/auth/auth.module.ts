@@ -1,17 +1,19 @@
+import { ApiModule } from './../api/api.module';
+import { LoginComponent } from './login/login.component';
+import { CoreModule } from './../core/core.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http'
 
-import { MaterializeCssModule } from './../materialize-css/materialize-css.module';
 
-import { AuthService } from './auth.service';
-import { LoginComponent } from './login.component';
+import { AuthService } from './../api/auth.service';
 
 @NgModule({
   imports: [
+    ApiModule,
     CommonModule,
-    MaterializeCssModule,
+    CoreModule,
     FormsModule,
     HttpModule,
   ],

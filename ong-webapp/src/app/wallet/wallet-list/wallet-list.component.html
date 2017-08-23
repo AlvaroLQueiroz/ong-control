@@ -1,0 +1,16 @@
+<ul class="collection">
+  <li class="collection-item" *ngFor="let wallet of wallets">
+    <h5 class="title">
+      {{ wallet.label }}
+      <a href="#!" class="secondary-content"><i class="material-icons">edit</i></a>
+    </h5>
+    <p>
+      Saldo: {{ wallet.balance }}
+    </p>
+  </li>
+</ul>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">add</i>
+  </a>
+</div>
