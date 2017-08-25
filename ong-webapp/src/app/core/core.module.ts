@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { CardComponent } from './card/card.component';
+import { ButtonBackComponent } from './button-back/button-back.component';
 
 @NgModule({
   imports: [
@@ -18,12 +19,14 @@ import { CardComponent } from './card/card.component';
     HomeComponent,
     NavbarComponent,
     SidenavComponent,
+    ButtonBackComponent,
   ],
   exports: [
     CardComponent,
     HomeComponent,
     NavbarComponent,
     SidenavComponent,
+    ButtonBackComponent,
   ]
 })
 export class CoreModule { }

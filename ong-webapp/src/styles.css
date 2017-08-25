@@ -25,3 +25,11 @@ nav {
 .pointer {
   cursor: pointer;
 }
+
+.card .card-title {
+  margin-top: 0;
+}
+
+.collapsible-header{
+  /* display: block !important; */
+}

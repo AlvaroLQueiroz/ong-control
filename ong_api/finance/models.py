@@ -11,7 +11,7 @@ from finance import TRANSACTION_INPUT, TRANSACTION_OUTPUT
 from finance.managers import WalletManager
 
 __all__ = [
-    'PeriodicTransaction',
+    'TransactionCategory',
     'Transaction',
     'Wallet',
 ]
@@ -36,7 +36,7 @@ class Wallet(models.Model):
         ordering = ['label', 'agency', 'number']
 
     def __str__(self):
-        return self.name
+        return self.label
 
     def balance(self):
         return self.transactions.aggregate(

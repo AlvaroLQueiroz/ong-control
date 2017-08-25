@@ -1,3 +1,45 @@
-<p>
-  wallet-editor works!
-</p>
+<app-card [sizes]="'s12'">
+  <h2 class="card-title">Editor de carteira</h2>
+  <div class="card-body">
+    <div class="row">
+      <form #wForm class="col s12" #walletForm="ngForm" materialize (ngSubmit)="submit()">
+        <div class="row">
+          <div class="switch center-align">
+            <label>
+              Desabilitada
+              <input type="checkbox" name="active" [(ngModel)]="wallet.active">
+              <span class="lever"></span>
+              Habilitada
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input id="agency" type="text" name="agency" [(ngModel)]="wallet.agency">
+            <label for="agency">Agência</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <input id="account" type="text" name="number" [(ngModel)]="wallet.number">
+            <label for="account">Número da conta</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="label" type="text" required name="label" [(ngModel)]="wallet.label">
+            <label for="label">Nome</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="description" class="materialize-textarea" name="description" [(ngModel)]="wallet.description"></textarea>
+            <label for="description">Descrição</label>
+          </div>
+        </div>
+        <div class="row center-align">
+          <a class="btn waves-effect orange" (click)="cancel()"><i class="material-icons left">close</i>Cancelar</a>
+          <button type="submit" class="btn waves-effect"><i class="material-icons left">save</i>Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</app-card>

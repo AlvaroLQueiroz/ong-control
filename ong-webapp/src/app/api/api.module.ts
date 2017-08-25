@@ -1,3 +1,4 @@
+import { TransactionService } from './transaction.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +13,8 @@ import { WalletService } from './wallet.service';
   exports: [
   ],
   providers: [
-    WalletService
+    WalletService,
+    TransactionService,
   ]
 })
 export class ApiModule { }

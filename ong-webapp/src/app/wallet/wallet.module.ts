@@ -1,3 +1,7 @@
+import { MaterializeModule } from 'angular2-materialize';
+import { FormsModule } from '@angular/forms';
+import { TransactionModule } from './../transaction/transaction.module';
+import { CoreModule } from './../core/core.module';
 import { WalletRoutingModule } from './wallet.routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,7 +12,11 @@ import { WalletViewerComponent } from './wallet-viewer/wallet-viewer.component';
 @NgModule({
   imports: [
     CommonModule,
-    WalletRoutingModule
+    CoreModule,
+    WalletRoutingModule,
+    TransactionModule,
+    FormsModule,
+    MaterializeModule
   ],
   declarations: [
     WalletListComponent,
