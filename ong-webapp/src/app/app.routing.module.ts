@@ -24,6 +24,12 @@ const appRoutes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: "transaction-category",
+    loadChildren: "app/transaction-category/transaction-category.module#TransactionCategoryModule",
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard]
+  },
+  {
     path: "transactions",
     loadChildren: "app/transaction/transaction.module#TransactionModule",
     canActivate: [AuthGuard],

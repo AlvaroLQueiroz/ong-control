@@ -1,0 +1,15 @@
+<ul class="collection">
+  <li class="collection-item pointer" *ngFor="let transactionCategory of transactionsCategories" [routerLink]="['/transaction-category', transactionCategory.id]">
+    <h5 class="title">
+      <i class="material-icons green-text" *ngIf="transactionCategory.transaction_type == 1">attach_money</i>
+      <i class="material-icons red-text" *ngIf="transactionCategory.transaction_type == 2">money_off</i>
+      {{ transactionCategory.label }}
+      <a class="secondary-content" [routerLink]="['/transaction-category', transactionCategory?.id, 'edit']"><i class="material-icons">edit</i></a>
+    </h5>
+  </li>
+</ul>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red" [routerLink]="['/transaction-category', 'add']">
+      <i class="large material-icons">add</i>
+    </a>
+</div>

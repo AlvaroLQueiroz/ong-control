@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'transactions/(?P<pk>\d+)/$', TransactionDetail.as_view()),
     url(r'transactions/wallet/(?P<pk>\d+)/$', WalletTransactionList.as_view()),
 
-    url(r'transaction-categories/$', TransactionCategoryList.as_view()),
-    url(r'transactions-categories/(?P<pk>\d+)/$', TransactionCategoryDetail.as_view()),
+    url(r'transaction-category/$', TransactionCategoryList.as_view()),
+    url(r'transaction-category/(?P<pk>\d+)/$', TransactionCategoryDetail.as_view()),
 ]

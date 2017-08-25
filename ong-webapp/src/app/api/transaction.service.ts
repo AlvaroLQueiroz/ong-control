@@ -28,7 +28,6 @@ export class TransactionService {
       )
       .toPromise()
       .then(resp => {
-        console.log(resp)
         return resp.json() as Transaction[];
       });
   }

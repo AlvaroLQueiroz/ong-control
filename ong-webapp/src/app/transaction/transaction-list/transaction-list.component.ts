@@ -20,7 +20,6 @@ export class TransactionListComponent implements OnInit {
 
   ngOnInit() {
     if(this.walletId){
-      console.log(this.walletId)
       this.transactionService.listWalletTransactions(this.walletId).then(transactions => {
         this.transactions = transactions;
       })

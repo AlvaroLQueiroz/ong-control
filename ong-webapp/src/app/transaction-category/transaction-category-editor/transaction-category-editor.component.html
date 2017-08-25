@@ -1,0 +1,59 @@
+<app-card [sizes]="'s12'">
+  <h2 class="card-title">Editor de categorias de transações</h2>
+  <div class="card-body">
+    <div class="row">
+      <form class="col s12" #transactionCategoryForm="ngForm" materialize (ngSubmit)="submit()">
+        <div class="row">
+          <div class="switch center-align">
+            <label>
+                Desabilitada
+                <input type="checkbox" name="active" [(ngModel)]="transactionCategory.active">
+                <span class="lever"></span>
+                Habilitada
+              </label>
+          </div>
+        </div>
+        <div class="row">
+          <h6>Tipo de transação</h6>
+          <p>
+            <input id="type1" type="radio" class="with-gap" name="transaction_type" [value]="1" [(ngModel)]="transactionCategory.transaction_type"
+            />
+            <label for="type1">Entrada</label>
+          </p>
+          <p>
+            <input id="type2" type="radio" class="with-gap" name="transaction_type" [value]="2" [(ngModel)]="transactionCategory.transaction_type"
+            />
+            <label for="type2">Saída</label>
+          </p>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="label" type="text" required name="label" [(ngModel)]="transactionCategory.label">
+            <label for="label">Nome</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="description" class="materialize-textarea" name="description" [(ngModel)]="transactionCategory.description"></textarea>
+            <label for="description">Descrição</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="switch center-align">
+              <h6>Precisa de nota fiscal</h6>
+              <label>
+                  Não
+                  <input type="checkbox" name="needs_nf" [(ngModel)]="transactionCategory.needs_nf">
+                  <span class="lever"></span>
+                  Sim
+                </label>
+            </div>
+          </div>
+        <div class="row center-align">
+          <a class="btn waves-effect orange" (click)="cancel()"><i class="material-icons left">close</i>Cancelar</a>
+          <button type="submit" class="btn waves-effect"><i class="material-icons left">save</i>Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</app-card>

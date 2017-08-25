@@ -6,12 +6,22 @@ export class ApiConfig {
 
     // #################### WALLETS ####################
     public static listWallets = '/wallets/';
+    public static createWallet = '/wallets/';
     public static getWallet(id: number): string{
       return `/wallets/${id}/`;
     }
-    public static createWallet = '/wallets/';
     public static updateWallet(id: number): string{
       return `/wallets/${id}/`;
+    }
+
+    // #################### TRANSACTIONS CATEGORY ###########
+    public static listTransactionCategory = '/transaction-category/';
+    public static createTransactionCategory = '/transaction-category/';
+    public static getTransactionCategory(id: number): string{
+      return `/transaction-category/${id}/`;
+    }
+    public static updateTransactionCategory(id: number): string{
+      return `/transaction-category/${id}/`;
     }
 
     // #################### TRANSACTIONS ####################

@@ -24,7 +24,6 @@ import { WalletViewerComponent } from './wallet-viewer/wallet-viewer.component';
     WalletViewerComponent,
   ],
   exports: [
-    WalletListComponent
   ]
 })
 export class WalletModule { }
