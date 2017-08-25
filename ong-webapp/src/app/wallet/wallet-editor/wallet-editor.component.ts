@@ -26,7 +26,7 @@ export class WalletEditorComponent implements OnInit {
   ngOnInit() {
     let walletId = this.route.snapshot.params['id'];
     if (walletId){
-      this.walletService.getWallet(walletId).then( wallet => {
+      this.walletService.getWallet(walletId).then(wallet => {
         this.wallet = wallet;
         this.loading = false;
       }).catch(error => console.log(error))

@@ -9,6 +9,6 @@ export class Transaction {
   due_date: Date;
   value: number;
 
-  category: TransactionCategory;
-  wallet: Wallet;
+  category: TransactionCategory|number;
+  wallet: Wallet|number;
 }

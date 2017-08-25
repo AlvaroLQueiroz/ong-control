@@ -1,0 +1,65 @@
+<app-card [sizes]="'s12'" *ngIf="!loading">
+  <h2 class="card-title">Editor de transações</h2>
+  <div class="card-body">
+    <div class="row">
+      <form #wForm class="col s12" #walletForm="ngForm" materialize (ngSubmit)="submit()">
+        <div class="row">
+          <div class="switch center-align">
+            <label>
+                Cancelada
+                <input type="checkbox" name="active" [(ngModel)]="transaction.active">
+                <span class="lever"></span>
+                Vigente
+              </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input id="due_date" type="text" required name="due_date" class="datepicker" [(ngModel)]="transaction.due_date" materialize="pickadate">
+            <label for="label">Data de realização</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <input id="value" type="text" required name="value" [(ngModel)]="transaction.value">
+            <label for="value">Valor</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <select name="category" [(ngModel)]="transaction.category" materialize="material_select" [materializeSelectOptions]="categories">
+                <option [value]="category.id" *ngFor="let category of categories">{{ category.label }}</option>
+              </select>
+            <label>Categoria</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <select name="wallet" [(ngModel)]="transaction.wallet" materialize="material_select" [materializeSelectOptions]="wallets">
+                <option [value]="wallet.id" *ngFor="let wallet of wallets">{{ wallet.label }}</option>
+              </select>
+            <label>Carteira</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="description" class="materialize-textarea" name="description" [(ngModel)]="transaction.description"></textarea>
+            <label for="description">Descrição</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <p>
+            <input class="with-gap" name="done" type="checkbox" id="done" [(ngModel)]="transaction.done" />
+            <label for="done" *ngIf="transaction.category == 1">Recebida</label>
+            <label for="done" *ngIf="transaction.category == 2">Paga</label>
+          </p>
+        </div>
+
+        <div class="row center-align">
+          <a class="btn waves-effect orange" (click)="cancel()"><i class="material-icons left">close</i>Cancelar</a>
+          <button type="submit" class="btn waves-effect"><i class="material-icons left">save</i>Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</app-card>

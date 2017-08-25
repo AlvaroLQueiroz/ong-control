@@ -20,8 +20,6 @@ class TransactionCategorySerializer(serializers.ModelSerializer):
 
 
 class TransactionSerializer(serializers.ModelSerializer):
-    category = TransactionCategorySerializer()
-    wallet = WalletSerializer()
     class Meta:
         model = Transaction
         fields = ('id', 'active', 'description', 'done', 'due_date', 'value', 'category', 'wallet')

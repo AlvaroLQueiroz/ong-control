@@ -26,14 +26,16 @@ export class ApiConfig {
 
     // #################### TRANSACTIONS ####################
     public static listTransactions = '/transactions/';
+    public static createTransaction = '/transactions/add/';
     public static listWalletTransactions(id: number): string{
       return `/transactions/wallet/${id}/`;
     }
     public static getTransaction(id: number): string{
       return `/transactions/${id}/`;
     }
-
-
+    public static updateTransaction(id: number): string{
+      return `/transactions/${id}/update/`;
+    }
 
 
     public static setToken(token: string){

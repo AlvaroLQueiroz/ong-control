@@ -32,28 +32,28 @@ export class TransactionCategoryService {
       });
   }
 
-  setTransactionCategory(wallet: TransactionCategory): Promise<TransactionCategory>{
-    if (wallet.id){
-      return this.updateTransactionCategory(wallet);
+  setTransactionCategory(transaction: TransactionCategory): Promise<TransactionCategory>{
+    if (transaction.id){
+      return this.updateTransactionCategory(transaction);
     }else{
-      return this.createTransactionCategory(wallet);
+      return this.createTransactionCategory(transaction);
     }
   }
 
-  updateTransactionCategory(wallet: TransactionCategory): Promise<TransactionCategory> {
+  updateTransactionCategory(transaction: TransactionCategory): Promise<TransactionCategory> {
     return this.http
-      .put(`${ApiConfig.apiAddress}:${ApiConfig.apiPort}${ApiConfig.updateTransactionCategory(wallet.id)}`,
-        JSON.stringify(wallet),
+      .put(`${ApiConfig.apiAddress}:${ApiConfig.apiPort}${ApiConfig.updateTransactionCategory(transaction.id)}`,
+        JSON.stringify(transaction),
         ApiConfig.getOptions()
       )
       .toPromise()
       .then(resp => resp.json());
   }
 
-  createTransactionCategory(wallet: TransactionCategory): Promise<TransactionCategory> {
+  createTransactionCategory(transaction: TransactionCategory): Promise<TransactionCategory> {
     return this.http
       .post(`${ApiConfig.apiAddress}:${ApiConfig.apiPort}${ApiConfig.createTransactionCategory}`,
-        JSON.stringify(wallet),
+        JSON.stringify(transaction),
         ApiConfig.getOptions()
       )
       .toPromise()

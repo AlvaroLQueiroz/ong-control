@@ -2,15 +2,14 @@
   <h2 class="card-title">Transações</h2>
   <div class="card-body">
     <ul class="collection">
-        <li class="collection-item" *ngFor="let transaction of transactions">
-          <div>
-            <i class="material-icons green-text" *ngIf="transaction.category.transaction_type == 1">attach_money</i>
-            <i class="material-icons red-text" *ngIf="transaction.category.transaction_type == 2">money_off</i>
-            R$ {{ transaction.value}}
-            <span class="secondary-content" *ngIf="transaction.done"><i class="material-icons secondary-content">done</i></span>
-            <span class="secondary-content" *ngIf="!transaction.done"><i class="material-icons">close</i></span>
-          </div>
-        </li>
+      <li class="collection-item pointer" *ngFor="let transaction of transactions" [routerLink]="['/transactions', transaction.id, 'edit']">
+        <div>
+          <i class="material-icons green-text" *ngIf="transaction.category.transaction_type == 1">attach_money</i>
+          <i class="material-icons red-text" *ngIf="transaction.category.transaction_type == 2">money_off</i> R$ {{ transaction.value}}
+          <span class="secondary-content" *ngIf="transaction.done"><i class="material-icons secondary-content">done</i></span>
+          <span class="secondary-content" *ngIf="!transaction.done"><i class="material-icons">close</i></span>
+        </div>
+      </li>
     </ul>
     <ul class="pagination center-align">
       <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
@@ -23,3 +22,8 @@
     </ul>
   </div>
 </app-card>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red" [routerLink]="['/transactions', 'add']">
+      <i class="large material-icons">add</i>
+    </a>
+</div>

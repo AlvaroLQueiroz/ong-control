@@ -1,26 +1,39 @@
 from rest_framework import generics
 from finance.models import Transaction
-from finance.serializers import TransactionSerializer
+from finance.serializers import TransactionSerializer, TransactionRelatedSerializer
 
 __all__ = [
+    'TransactionCreate',
     'TransactionList',
-    'TransactionDetail',
+    'TransactionRetrieve',
+    'TransactionDestroy',
+    'TransactionUpdate',
     'WalletTransactionList',
 ]
 
-
-class TransactionList(generics.ListCreateAPIView):
+class TransactionCreate(generics.CreateAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
 
+class TransactionList(generics.ListAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionRelatedSerializer
 
-class TransactionDetail(generics.RetrieveUpdateDestroyAPIView):
+class TransactionRetrieve(generics.RetrieveAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+
+class TransactionDestroy(generics.DestroyAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
 
     def perform_destroy(self, instance):
         instance.disable()
 
-class WalletTransactionList(generics.ListCreateAPIView):
+class TransactionUpdate(generics.UpdateAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+
+class WalletTransactionList(generics.ListAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionRelatedSerializer
