@@ -16,7 +16,7 @@
 
         <div class="row">
           <div class="input-field col s12 m6">
-            <input id="due_date" type="text" required name="due_date" class="datepicker" [(ngModel)]="transaction.due_date" materialize="pickadate">
+            <input id="due_date" type="text" required name="due_date" class="datepicker" [(ngModel)]="transaction.due_date" materialize="pickadate" [materializeParams]="[{format: 'yyyy-mm-dd'}]">
             <label for="label">Data de realização</label>
           </div>
           <div class="input-field col s12 m6">
