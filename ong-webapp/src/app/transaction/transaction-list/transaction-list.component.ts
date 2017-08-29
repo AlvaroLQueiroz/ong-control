@@ -11,6 +11,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TransactionListComponent implements OnInit {
 
   @Input()  walletId: number = null;
+  @Input()  categoryId: number = null;
   @Input() sizes: string = 's12';
   transactions: Transaction[] = null;
 
@@ -21,6 +22,11 @@ export class TransactionListComponent implements OnInit {
   ngOnInit() {
     if(this.walletId){
       this.transactionService.listWalletTransactions(this.walletId).then(transactions => {
+        this.transactions = transactions;
+      })
+    }
+    else if(this.categoryId){
+      this.transactionService.listCategoryTransactions(this.categoryId).then(transactions => {
         this.transactions = transactions;
       })
     }else{

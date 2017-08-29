@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { CardComponent } from './card/card.component';
 import { ButtonBackComponent } from './button-back/button-back.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { ButtonBackComponent } from './button-back/button-back.component';
     NavbarComponent,
     SidenavComponent,
     ButtonBackComponent,
+    PaginationComponent,
   ],
   exports: [
     CardComponent,
@@ -27,6 +29,7 @@ import { ButtonBackComponent } from './button-back/button-back.component';
     NavbarComponent,
     SidenavComponent,
     ButtonBackComponent,
+    PaginationComponent,
   ]
 })
 export class CoreModule { }

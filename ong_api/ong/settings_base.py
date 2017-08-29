@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'core',
     'finance',
 
     'rest_framework',
@@ -96,7 +97,10 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'core.pagination.Pagination',
+    'PAGE_SIZE': 1,
+    'PAGINATOR_SIZE': 5
 }
 
 CORS_ORIGIN_ALLOW_ALL = True

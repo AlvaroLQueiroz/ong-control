@@ -1,6 +1,6 @@
 <ul id="slide-out" class="side-nav fixed" materialize="sideNav">
   <li class="no-padding">
-    <ul class="collapsible collapsible-accordion">
+    <ul class="collapsible collapsible-accordion" [materialize]="['collapsible']">
       <li>
         <div class="user-view">
           <div class="background">
@@ -12,13 +12,23 @@
         </div>
       </li>
       <li routerLinkActive="active"><a routerLink="/home" class="pointer">Home</a></li>
-      <li routerLinkActive="active">
-        <a class="collapsible-header">Financeiro<i class="material-icons">arrow_drop_down</i></a>
+      <li>
+        <a class="collapsible-header" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Financeiro<i class="material-icons">arrow_drop_down</i></a>
         <div class="collapsible-body">
           <ul>
             <li routerLinkActive="active"><a routerLink="/wallets">Carteiras</a></li>
             <li routerLinkActive="active"><a routerLink="/transaction-category">Categorias</a></li>
             <li routerLinkActive="active"><a routerLink="/transactions">Transações</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a class="collapsible-header" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Recursos Humanos<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li routerLinkActive="active"><a routerLink="/sd">Carteiras</a></li>
+            <li routerLinkActive="active"><a routerLink="/asd">Categorias</a></li>
+            <li routerLinkActive="active"><a routerLink="/asd">Transações</a></li>
           </ul>
         </div>
       </li>

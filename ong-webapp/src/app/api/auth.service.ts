@@ -1,9 +1,9 @@
+import { ApiService } from './api.service';
 import { Login } from './../auth/login/login';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Injectable, EventEmitter } from '@angular/core';
 import 'rxjs/add/operator/map'
-import { ApiConfig } from './api.config';
 
 @Injectable()
 export class AuthService {
@@ -15,18 +15,19 @@ export class AuthService {
   constructor(
     private http: Http,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private apiService: ApiService
   ) { }
 
   login(user: Login) {
-    return this.http.post(`${ApiConfig.apiAddress}:${ApiConfig.apiPort}/api-token-auth/`, user)
+    return this.http.post(this.apiService.url('auth'), user)
       .map(resp => {
         var response = resp.json()
         if (response.token) {
-          ApiConfig.authenticate(response.token);
+          this.apiService.authenticate(response.token);
           this.showMenuEmitter.emit(true);
         } else {
-          ApiConfig.logout()
+          this.apiService.logout()
           this.showMenuEmitter.emit(false);
         }
         return response;
@@ -34,12 +35,12 @@ export class AuthService {
   }
 
   logout() {
-    ApiConfig.logout();
+    this.apiService.logout();
     this.router.navigate(['/login']);
     this.showMenuEmitter.emit(false);
   }
 
   isAuthenticated() {
-    return ApiConfig.isAuthenticated();
+    return this.apiService.isAuthenticated();
   }
 }

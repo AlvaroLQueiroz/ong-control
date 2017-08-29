@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.db.models import Case, F, Sum, When
+from django.db.models import Case, F, Sum, When, DecimalField
 from django.utils.translation import ugettext as _
 from finance import TRANSACTION_INPUT, TRANSACTION_OUTPUT
 from finance.managers import WalletManager
@@ -43,7 +43,8 @@ class Wallet(models.Model):
             total=Sum(
                 Case(
                     When(active=True, category__transaction_type=TRANSACTION_INPUT, done=True, then=F('value')),
-                    When(active=True, category__transaction_type=TRANSACTION_OUTPUT, done=True, then=F('value') * -1)
+                    When(active=True, category__transaction_type=TRANSACTION_OUTPUT, done=True, then=F('value')),
+                    output_field=DecimalField()
                 )
             )
         )['total'] or Decimal('0.0')

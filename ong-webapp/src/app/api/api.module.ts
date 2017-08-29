@@ -1,3 +1,6 @@
+import { PaginationService } from './pagination.service';
+import { AuthService } from './auth.service';
+import { ApiService } from './api.service';
 import { TransactionCategoryService } from './transaction-category.service';
 import { TransactionService } from './transaction.service';
 import { NgModule } from '@angular/core';
@@ -14,9 +17,12 @@ import { WalletService } from './wallet.service';
   exports: [
   ],
   providers: [
-    WalletService,
-    TransactionService,
+    ApiService,
+    AuthService,
+    PaginationService,
     TransactionCategoryService,
+    TransactionService,
+    WalletService,
   ]
 })
 export class ApiModule { }

@@ -8,14 +8,9 @@ import { MaterializeAction } from 'angular2-materialize';
 })
 export class SidenavComponent implements OnInit {
 
-  // sideNavActions = new EventEmitter<string|MaterializeAction>();
-
   constructor() { }
 
   ngOnInit() {
   }
 
-  // sideNavOpen(){
-  //   this.sideNavActions.emit({action:"sideNav", params:["show"]});
-  // }
 }

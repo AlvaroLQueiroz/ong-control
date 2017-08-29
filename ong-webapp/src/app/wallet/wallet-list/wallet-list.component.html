@@ -1,14 +1,20 @@
-<ul class="collection">
-  <li class="collection-item pointer" *ngFor="let wallet of wallets" [routerLink]="['/wallets', wallet.id]">
-    <h5 class="title">
-      {{ wallet.label }}
-      <a class="secondary-content" [routerLink]="['/wallets', wallet?.id, 'edit']"><i class="material-icons">edit</i></a>
-    </h5>
-    <p>
-      Saldo: R$ {{ wallet.balance }}
-    </p>
-  </li>
-</ul>
+<app-card sizes="s12">
+  <h1 class="card-title">Carteiras</h1>
+  <div class="card-body">
+    <ul class="collection">
+      <li class="collection-item pointer" *ngFor="let wallet of wallets" [routerLink]="['/wallets', wallet.id]">
+        <h5 class="title">
+          {{ wallet.label }}
+          <a class="secondary-content" [routerLink]="['/wallets', wallet?.id, 'edit']"><i class="material-icons">edit</i></a>
+        </h5>
+        <p>
+          Saldo: {{ wallet.balance | currency:'BRL':true }}
+        </p>
+      </li>
+    </ul>
+    <app-pagination></app-pagination>
+  </div>
+</app-card>
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large red" [routerLink]="['/wallets', 'add']">
     <i class="large material-icons">add</i>

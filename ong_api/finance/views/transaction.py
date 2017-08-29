@@ -9,6 +9,7 @@ __all__ = [
     'TransactionDestroy',
     'TransactionUpdate',
     'WalletTransactionList',
+    'CategoryTransactionList',
 ]
 
 class TransactionCreate(generics.CreateAPIView):
@@ -37,3 +38,13 @@ class TransactionUpdate(generics.UpdateAPIView):
 class WalletTransactionList(generics.ListAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionRelatedSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        return super(WalletTransactionList, self).get_queryset(*args, **kwargs).filter(wallet=self.kwargs.get('pk'))
+
+class CategoryTransactionList(generics.ListAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionRelatedSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        return super(CategoryTransactionList, self).get_queryset(*args, **kwargs).filter(category=self.kwargs.get('pk'))

@@ -1,3 +1,4 @@
+import { TransactionModule } from '../transaction/transaction.module';
 import { MaterializeModule } from 'angular2-materialize';
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from './../core/core.module';
@@ -9,16 +10,12 @@ import { TransactionCategoryEditorComponent } from "./transaction-category-edito
 import { TransactionCategoryViewerComponent } from "./transaction-category-viewer/transaction-category-viewer.component";
 
 @NgModule({
-  imports: [CommonModule, TransactionCategoryRoutingModule, CoreModule, FormsModule, MaterializeModule],
+  imports: [CommonModule, TransactionCategoryRoutingModule, CoreModule, FormsModule, MaterializeModule, TransactionModule],
   declarations: [
     TransactionCategoryListComponent,
     TransactionCategoryEditorComponent,
     TransactionCategoryViewerComponent
   ],
-  exports: [
-    TransactionCategoryListComponent,
-    TransactionCategoryEditorComponent,
-    TransactionCategoryViewerComponent
-  ]
+  exports: []
 })
 export class TransactionCategoryModule {}

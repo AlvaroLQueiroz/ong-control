@@ -1,13 +1,28 @@
-<ul class="collection">
-  <li class="collection-item pointer" *ngFor="let transactionCategory of transactionsCategories" [routerLink]="['/transaction-category', transactionCategory.id]">
-    <h5 class="title">
-      <i class="material-icons green-text" *ngIf="transactionCategory.transaction_type == 1">attach_money</i>
-      <i class="material-icons red-text" *ngIf="transactionCategory.transaction_type == 2">money_off</i>
-      {{ transactionCategory.label }}
-      <a class="secondary-content" [routerLink]="['/transaction-category', transactionCategory?.id, 'edit']"><i class="material-icons">edit</i></a>
-    </h5>
-  </li>
-</ul>
+<app-card [sizes]="['s12']">
+  <h1 class="card-title">Categorias de transações</h1>
+  <div class="card-body">
+    <ul class="collection">
+      <li class="collection-item pointer" *ngFor="let transactionCategory of transactionsCategories" [routerLink]="['/transaction-category', transactionCategory.id]">
+        <h5 class="title">
+          <i class="material-icons green-text" *ngIf="transactionCategory.transaction_type == 1">attach_money</i>
+          <i class="material-icons red-text" *ngIf="transactionCategory.transaction_type == 2">money_off</i> {{ transactionCategory.label }}
+          <a class="secondary-content" [routerLink]="['/transaction-category', transactionCategory?.id, 'edit']"><i class="material-icons">edit</i></a>
+        </h5>
+      </li>
+    </ul>
+    <div class="center-align">
+      <ul class="pagination">
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        <li class="active"><a href="#!">1</a></li>
+        <li class="waves-effect"><a href="#!">2</a></li>
+        <li class="waves-effect"><a href="#!">3</a></li>
+        <li class="waves-effect"><a href="#!">4</a></li>
+        <li class="waves-effect"><a href="#!">5</a></li>
+        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+      </ul>
+    </div>
+  </div>
+</app-card>
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large red" [routerLink]="['/transaction-category', 'add']">
       <i class="large material-icons">add</i>
