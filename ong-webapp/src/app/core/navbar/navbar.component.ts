@@ -8,21 +8,17 @@ import { MaterializeAction } from 'angular2-materialize';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  sideNavActions = new EventEmitter<string | MaterializeAction>();
 
-  sideNavActions = new EventEmitter<string|MaterializeAction>();
+  constructor(private authService: AuthService) {}
 
-  constructor(
-    private authService: AuthService
-  ) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   sideNavOpen() {
-    this.sideNavActions.emit({action: 'sideNav', params: ['show']});
+    this.sideNavActions.emit({ action: 'sideNav', params: ['show'] });
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
   }
 }

@@ -1,18 +1,26 @@
 <app-card sizes="s12">
   <h1 class="card-title">Carteiras</h1>
   <div class="card-body">
-    <ul class="collection">
-      <li class="collection-item pointer" *ngFor="let wallet of wallets" [routerLink]="['/wallets', wallet.id]">
-        <h5 class="title">
-          {{ wallet.label }}
-          <a class="secondary-content" [routerLink]="['/wallets', wallet?.id, 'edit']"><i class="material-icons">edit</i></a>
-        </h5>
-        <p>
-          Saldo: {{ wallet.balance | currency:'BRL':true }}
-        </p>
-      </li>
-    </ul>
-    <app-pagination></app-pagination>
+    <div *ngIf="!loading; else errorBlock">
+      <ul class="collection">
+        <li class="collection-item pointer" *ngFor="let wallet of wallets" [routerLink]="['/wallets', wallet.id]">
+          <h5 class="title">
+            {{ wallet.label }}
+            <a class="secondary-content" [routerLink]="['/wallets', wallet?.id, 'edit']"><i class="material-icons">edit</i></a>
+          </h5>
+          <p>
+            Saldo: {{ wallet.balance | currency:'BRL':true }}
+          </p>
+        </li>
+      </ul>
+      <app-pagination [page]="page"></app-pagination>
+    </div>
+    <ng-template #errorBlock>
+      <p class="center-align" >
+        Nenhuma carteira encontrada.<br>
+        <a class="pointer" [routerLink]="['/wallets', 'add']">Clique aqui para adicionar uma.</a>
+      </p>
+    </ng-template>
   </div>
 </app-card>
 <div class="fixed-action-btn">

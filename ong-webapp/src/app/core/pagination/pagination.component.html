@@ -1,11 +1,11 @@
-<div class="center-align" *ngIf="!loading">
+<div class="center-align" *ngIf="page" >
   <ul class="pagination">
-    <li *ngIf="firstLast" [class.disabled]="pages.actual == 1"><a routerLink="." [queryParams]="pages.first" queryParamsHandling="merge"><i class="material-icons">first_page</i></a></li>
-    <li [class.waves-effect]="pages.actual != 1" [class.disabled]="pages.actual == 1"><a routerLink="." [queryParams]="pages.previous" queryParamsHandling="merge"><i class="material-icons">chevron_left</i></a></li>
+    <li *ngIf="firstLast" [class.disabled]="page.actual == 1"><a routerLink="." [queryParams]="page.first" queryParamsHandling="merge"><i class="material-icons">first_page</i></a></li>
+    <li [class.waves-effect]="page.actual != 1" [class.disabled]="page.actual == 1"><a routerLink="." [queryParams]="page.previous" queryParamsHandling="merge"><i class="material-icons">chevron_left</i></a></li>
 
-    <li *ngFor="let page of pages.range" [class.active]="page.active"><a routerLink="." [queryParams]="page.link" queryParamsHandling="merge">{{ page.number }}</a></li>
+    <li *ngFor="let page of page.range" [class.active]="page.active"><a routerLink="." [queryParams]="page.link" queryParamsHandling="merge">{{ page.number }}</a></li>
 
-    <li [class.waves-effect]="pages.actual != pages.count" [class.disabled]="pages.actual == pages.count"><a routerLink="." [queryParams]="pages.next" queryParamsHandling="merge"><i class="material-icons">chevron_right</i></a></li>
-    <li *ngIf="firstLast" [class.disabled]="pages.actual == pages.count"><a routerLink="." [queryParams]="pages.last" queryParamsHandling="merge"><i class="material-icons">last_page</i></a></li>
+    <li [class.waves-effect]="page.actual != page.count" [class.disabled]="page.actual == page.count"><a routerLink="." [queryParams]="page.next" queryParamsHandling="merge"><i class="material-icons">chevron_right</i></a></li>
+    <li *ngIf="firstLast" [class.disabled]="page.actual == page.count"><a routerLink="." [queryParams]="page.last" queryParamsHandling="merge"><i class="material-icons">last_page</i></a></li>
   </ul>
 </div>

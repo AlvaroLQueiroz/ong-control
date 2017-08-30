@@ -1,34 +1,19 @@
-import { Subscription } from "rxjs/Rx";
-import { PaginationService } from "./../../api/pagination.service";
-import { Component, OnInit, Input } from "@angular/core";
+import { Page } from './page';
+import { Subscription } from 'rxjs/Rx';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import 'rxjs/add/operator/finally';
 @Component({
-  selector: "app-pagination",
-  templateUrl: "./pagination.component.html",
-  styleUrls: ["./pagination.component.css"]
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.css']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnDestroy {
   @Input() firstLast: boolean = false;
-  paginationSubscription: Subscription;
-  pages: any;
-  loading: boolean = true;
+  @Input() page: Page;
 
-  constructor(private paginationService: PaginationService) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.paginationSubscription = this.paginationService
-      .getMessage()
-      .finally(() => console.log('ola'))
-      .subscribe(
-        pages => {
-          this.pages = pages;
-          this.loading = false;
-        },
-        err => console.log(err),
-      );
-  }
+  ngOnInit() {}
 
-  ngOnDestroy() {
-    this.paginationSubscription.unsubscribe();
-  }
+  ngOnDestroy() {}
 }

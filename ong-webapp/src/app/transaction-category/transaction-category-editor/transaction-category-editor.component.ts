@@ -1,4 +1,4 @@
-import { TransactionCategoryService } from './../../api/transaction-category.service';
+import { ApiService } from './../../api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionCategory } from './../transaction-category';
 import { Component, OnInit } from '@angular/core';
@@ -10,14 +10,13 @@ import { Location } from '@angular/common';
   styleUrls: ['./transaction-category-editor.component.css']
 })
 export class TransactionCategoryEditorComponent implements OnInit {
-
   transactionCategory: TransactionCategory = null;
   loading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private transactionCategoryService: TransactionCategoryService,
+    private apiService: ApiService,
     private location: Location
   ) {
     this.transactionCategory = new TransactionCategory();
@@ -25,23 +24,36 @@ export class TransactionCategoryEditorComponent implements OnInit {
   }
 
   ngOnInit() {
-    let transactionCategoryId = this.route.snapshot.params['id'];
-    if(transactionCategoryId){
-      this.transactionCategoryService.getTransactionCategory(transactionCategoryId).then(transactionCategory => {
-        this.transactionCategory = transactionCategory;
-        this.loading = false;
-      })
+    const transactionCategoryId = this.route.snapshot.params['id'];
+    if (transactionCategoryId) {
+      this.apiService
+        .params(transactionCategoryId)
+        .get('getTransactionCategory')
+        .toPromise()
+        .then(resp => {
+          const response = resp.json();
+          this.transactionCategory = response.results as TransactionCategory;
+          this.loading = false;
+        });
     }
   }
 
-  submit(){
-    this.transactionCategoryService.setTransactionCategory(this.transactionCategory)
-      .then(transactionCategory => {
-        this.router.navigate(['/transaction-category', transactionCategory.id])
-      })
+  submit() {
+    let request;
+    if (this.transactionCategory.id) {
+      request = this.apiService
+        .data(this.transactionCategory)
+        .params(this.transactionCategory.id)
+        .put('updateTransactionCategory');
+    } else {
+      request = this.apiService.data(this.transactionCategory).post('createTransactionCategory');
+    }
+    request.toPromise().then(resp => {
+      this.router.navigate(['/transaction-category', resp.json().id]);
+    });
   }
 
-  cancel(){
+  cancel() {
     this.location.back();
   }
 }

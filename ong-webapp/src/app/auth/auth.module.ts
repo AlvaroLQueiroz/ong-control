@@ -4,7 +4,7 @@ import { CoreModule } from './../core/core.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http'
+import { HttpModule } from '@angular/http';
 
 
 import { AuthService } from './../api/auth.service';
@@ -19,6 +19,6 @@ import { AuthService } from './../api/auth.service';
   ],
   declarations: [LoginComponent],
   exports: [LoginComponent],
-  providers: [AuthService]
+  providers: [AuthService],
 })
 export class AuthModule { }

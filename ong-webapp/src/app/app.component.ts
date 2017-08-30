@@ -9,14 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   menuIsVisible: boolean;
 
-  constructor(
-    private authService: AuthService
-  ){}
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.menuIsVisible = this.authService.isAuthenticated();
-    this.authService.showMenuEmitter.subscribe(
-      showMenu => this.menuIsVisible = showMenu
-    )
+    this.authService.showMenuEmitter.subscribe(showMenu => (this.menuIsVisible = showMenu));
   }
 }

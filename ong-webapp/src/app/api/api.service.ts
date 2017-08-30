@@ -1,25 +1,24 @@
 import { Observable } from 'rxjs/Rx';
-import { RequestOptions, Headers, Http, RequestMethod, Response  } from '@angular/http';
+import { RequestOptions, Headers, Http, RequestMethod, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 
 @Injectable()
 export class ApiService {
   private _body: any = null;
-  private _endpoints = null
+  private _endpoints = null;
   private _options: {} = null;
   private _params: any[] = null;
   private _qParams: string = null;
 
-  constructor(
-    private http: Http
-  ) {
+  constructor(private http: Http) {
     this._params = [];
     this._qParams = '';
     this._options = {
-      'headers': new Headers({
-      'Authorization': 'Token ' + this.getToken(),
-      'Content-type': 'application/json'})
+      headers: new Headers({
+        Authorization: 'Token ' + this.getToken(),
+        'Content-type': 'application/json'
+      })
     };
     this._endpoints = {
       // #################### AUTH ####################
@@ -42,7 +41,7 @@ export class ApiService {
       listWalletTransactions: (id: number) => `/transactions/wallet/${id}/`,
       listCategoryTransactions: (id: number) => `/transactions/category/${id}/`,
       getTransaction: (id: number) => `/transactions/${id}/`,
-      updateTransaction: (id: number) => `/transactions/${id}/update/`,
+      updateTransaction: (id: number) => `/transactions/${id}/update/`
     };
   }
 
@@ -68,68 +67,72 @@ export class ApiService {
     localStorage.setItem('isAuthenticated', 'false');
   }
 
-  requestOptions(opt: {}): ApiService{
+  requestOptions(opt: {}): ApiService {
     this._options = Object.assign(this._options, opt);
     return this;
   }
 
-  data(body: any): ApiService{
+  data(body: any): ApiService {
     this._body = body;
     return this;
   }
 
-  params(...parameters: any[]): ApiService{
+  params(...parameters: any[]): ApiService {
     this._params = parameters;
     return this;
   }
 
-  queryParams(qParams: {}): ApiService{
-    this._qParams = Object.keys(qParams).map(key => `${key}=${qParams[key]}`).join('&');
+  queryParams(qParams: {}): ApiService {
+    this._qParams = Object.keys(qParams)
+      .map(key => `${key}=${qParams[key]}`)
+      .join('&');
     return this;
   }
 
   url(endpoint: string): string {
-    return `${environment.apiAddress}:${environment.apiPort}${this._endpoints[endpoint](this._params)}?${this._qParams}`;
+    return `${environment.apiAddress}:${environment.apiPort}${this._endpoints[endpoint](
+      this._params
+    )}?${this._qParams}`;
   }
 
-  getRequestOptions(method: RequestMethod|string|null): RequestOptions {
-    let opts = {
+  getRequestOptions(method: RequestMethod | string | null): RequestOptions {
+    const opts = {
       method: method,
-      body: this._body,
-    }
+      body: this._body
+    };
     return new RequestOptions(Object.assign(opts, this._options));
   }
 
-  resolver(endpoint: string, method?: RequestMethod|string|null): Observable<Response>{
-    console.log(this.url(endpoint))
+  resolver(endpoint: string, method?: RequestMethod | string | null): Observable<Response> {
+    console.log(this.url(endpoint));
     return this.http.request(this.url(endpoint), this.getRequestOptions(method));
   }
 
-  delete(endpoint: string): Observable<Response>{
+  delete(endpoint: string): Observable<Response> {
     return this.resolver(endpoint, 'delete');
   }
 
-  get(endpoint: string): Observable<Response>{
+  get(endpoint: string): Observable<Response> {
     return this.resolver(endpoint, 'get');
   }
 
-  head(endpoint: string): Observable<Response>{
+  head(endpoint: string): Observable<Response> {
     return this.resolver(endpoint, 'head');
   }
 
-  options(endpoint: string): Observable<Response>{
+  options(endpoint: string): Observable<Response> {
     return this.resolver(endpoint, 'options');
   }
 
-  patch(endpoint: string): Observable<Response>{
+  patch(endpoint: string): Observable<Response> {
     return this.resolver(endpoint, 'patch');
   }
 
-  post(endpoint: string): Observable<Response>{
+  post(endpoint: string): Observable<Response> {
     return this.resolver(endpoint, 'post');
   }
 
-  put(endpoint: string): Observable<Response>{
+  put(endpoint: string): Observable<Response> {
     return this.resolver(endpoint, 'put');
   }
 }

@@ -1,9 +1,9 @@
-import { TransactionService } from './../../api/transaction.service';
-import { TransactionCategoryService } from './../../api/transaction-category.service';
+import { ApiService } from './../../api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TransactionCategory } from './../transaction-category';
+import { TransactionCategory, TransactionType } from './../transaction-category';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-transaction-category-viewer',
@@ -11,26 +11,28 @@ import { Location } from '@angular/common';
   styleUrls: ['./transaction-category-viewer.component.css']
 })
 export class TransactionCategoryViewerComponent implements OnInit {
-
   transactionCategory: TransactionCategory = null;
   loading: boolean = true;
+  transactionType: any = TransactionType;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private transactionCategoryService: TransactionCategoryService,
-    private transactionService: TransactionService,
-  ) { }
+    private apiService: ApiService
+  ) {}
 
   ngOnInit() {
-    let transactionCategoryId = this.route.snapshot.params['id'];
-    if (transactionCategoryId){
-      this.transactionCategoryService.getTransactionCategory(transactionCategoryId).then(transactionCategory => {
-        this.transactionCategory = transactionCategory;
-        this.loading = false;
-      })
+    const transactionCategoryId = this.route.snapshot.params['id'];
+    if (transactionCategoryId) {
+      this.apiService
+        .params(transactionCategoryId)
+        .get('getTransactionCategory')
+        .toPromise()
+        .then(resp => {
+          this.transactionCategory = resp.json() as TransactionCategory;
+          this.loading = false;
+        });
     }
   }
-
 }

@@ -1,6 +1,5 @@
 <app-card [sizes]="'s12'" *ngIf="!loading" >
   <h2 class="card-title">
-    <i class="material-icons">check</i>
     {{ wallet?.label }}
     <a class="secondary-content" [routerLink]="['/wallets', wallet?.id, 'edit']"><i class="material-icons">edit</i></a>
   </h2>

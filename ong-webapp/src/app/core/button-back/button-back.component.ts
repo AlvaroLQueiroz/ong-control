@@ -1,22 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
-
 @Component({
   selector: 'app-button-back',
   templateUrl: './button-back.component.html',
   styleUrls: ['./button-back.component.css']
 })
 export class ButtonBackComponent implements OnInit {
+  constructor(private location: Location) {}
 
-  constructor(
-    private location: Location
-  ) { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  back(){
+  back() {
     this.location.back();
   }
 }

@@ -1,7 +1,7 @@
 import { AuthService } from './../../api/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { Login } from './login'
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Login } from './login';
 import { Subscription } from 'rxjs/Rx';
 
 @Component({
@@ -9,8 +9,7 @@ import { Subscription } from 'rxjs/Rx';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-
+export class LoginComponent implements OnInit, OnDestroy {
   user: Login = {
     username: null,
     password: null
@@ -23,7 +22,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.next = this.route.snapshot.queryParams['next'] || 'home';
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit {
     this.loginSubscription = this.authService.login(this.user).subscribe(
       resp => {
         this.hasError = false;
-        this.router.navigate([this.next])
+        this.router.navigate([this.next]);
       },
       resp => {
         this.hasError = true;

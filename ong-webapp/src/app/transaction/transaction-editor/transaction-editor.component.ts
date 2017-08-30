@@ -1,10 +1,8 @@
+import { ApiService } from '../../api/api.service';
 import { MaterializeAction } from 'angular2-materialize';
-import { TransactionCategoryService } from './../../api/transaction-category.service';
-import { WalletService } from './../../api/wallet.service';
 import { TransactionCategory } from './../../transaction-category/transaction-category';
 import { Wallet } from './../../wallet/wallet';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TransactionService } from './../../api/transaction.service';
 import { Transaction } from '../transaction';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
@@ -15,7 +13,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./transaction-editor.component.css']
 })
 export class TransactionEditorComponent implements OnInit {
-
   transaction: Transaction = null;
   loading: boolean = true;
 
@@ -26,43 +23,64 @@ export class TransactionEditorComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private transactionService: TransactionService,
-    private walletService: WalletService,
-    private transactionCategoryService: TransactionCategoryService
+    private apiService: ApiService
   ) {
     this.transaction = new Transaction();
     this.transaction.active = true;
   }
 
   ngOnInit() {
-    console.log('ola')
-    let transactionId = this.route.snapshot.params['id'];
-    if(transactionId){
-      this.transactionService.getTransaction(transactionId).then(transaction => {
-        this.transaction = transaction;
-        this.loading = false;
-      });
-    }else{
+    const transactionId = this.route.snapshot.params['id'];
+    if (transactionId) {
+      this.apiService
+        .params(transactionId)
+        .get('getTransaction')
+        .toPromise()
+        .then(resp => {
+          this.transaction = resp.json() as Transaction;
+          this.loading = false;
+        });
+    } else {
       this.loading = false;
     }
-    this.walletService.getWallets().then(wallets => {
-      this.wallets = wallets;
-    });
-    this.transactionCategoryService.listTransactionCategory().then(categories => {
-      this.categories = categories;
-    });
+    this.apiService
+      .queryParams({ page_size: 0 })
+      .get('listWallets')
+      .toPromise()
+      .then(resp => {
+        this.wallets = resp.json().results as Wallet[];
+      });
+    this.apiService
+      .queryParams({ page_size: 0 })
+      .get('listTransactionCategory')
+      .toPromise()
+      .then(resp => {
+        this.categories = resp.json().results as TransactionCategory[];
+      });
   }
 
-  submit(){
-    console.log(this.transaction)
-    this.transactionService.setTransaction(this.transaction)
-    .then(transaction => {
-      this.router.navigate(['/transactions'])
-    }).catch(err => console.log(err))
+  submit() {
+    let request;
+    if (this.transaction.id) {
+      request = this.apiService
+        .data(this.transaction)
+        .put('updateTransaction')
+        .toPromise();
+    } else {
+      request = this.apiService
+        .data(this.transaction)
+        .post('createTransaction')
+        .toPromise();
+    }
+
+    request
+      .then(transaction => {
+        this.router.navigate(['/transactions']);
+      })
+      .catch(err => console.log(err));
   }
 
-  cancel(){
+  cancel() {
     this.location.back();
   }
-
 }

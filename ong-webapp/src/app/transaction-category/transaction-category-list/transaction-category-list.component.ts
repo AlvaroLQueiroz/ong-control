@@ -1,4 +1,5 @@
-import { TransactionCategoryService } from './../../api/transaction-category.service';
+import { Page } from '../../core/pagination/page';
+import { ApiService } from '../../api/api.service';
 import { TransactionCategory } from './../transaction-category';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,18 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transaction-category-list.component.css']
 })
 export class TransactionCategoryListComponent implements OnInit {
-
   transactionsCategories: TransactionCategory[] = null;
+  page: Page = null;
 
-  constructor(
-    private transactionCategoryService: TransactionCategoryService
-  ) { }
+  constructor(private apiSerive: ApiService) {}
 
   ngOnInit() {
-    this.transactionCategoryService.listTransactionCategory()
-      .then(transactionCategories => {
-        this.transactionsCategories = transactionCategories;
-      })
+    this.apiSerive
+      .get('listTransactionCategory')
+      .toPromise()
+      .then(resp => {
+        const response = resp.json();
+        this.transactionsCategories = response.results as TransactionCategory[];
+        this.page = response.page as Page;
+      });
   }
-
 }

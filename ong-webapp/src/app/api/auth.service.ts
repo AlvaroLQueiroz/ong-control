@@ -3,11 +3,10 @@ import { Login } from './../auth/login/login';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Injectable, EventEmitter } from '@angular/core';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
-
   private _isAuthenticated: boolean = false;
 
   showMenuEmitter = new EventEmitter<boolean>();
@@ -17,21 +16,23 @@ export class AuthService {
     private router: Router,
     private route: ActivatedRoute,
     private apiService: ApiService
-  ) { }
+  ) {}
 
   login(user: Login) {
-    return this.http.post(this.apiService.url('auth'), user)
+    return this.apiService
+      .data(user)
+      .get('auth')
       .map(resp => {
-        var response = resp.json()
+        const response = resp.json();
         if (response.token) {
           this.apiService.authenticate(response.token);
           this.showMenuEmitter.emit(true);
         } else {
-          this.apiService.logout()
+          this.apiService.logout();
           this.showMenuEmitter.emit(false);
         }
         return response;
-      })
+      });
   }
 
   logout() {

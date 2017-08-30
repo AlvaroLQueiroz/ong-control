@@ -1,22 +1,16 @@
 <app-card [sizes]="'s12'" *ngIf="!loading" >
     <h2 class="card-title">
-      <i class="material-icons">check</i>
       {{ transactionCategory?.label }}
       <a class="secondary-content" [routerLink]="['/transaction-category', transactionCategory?.id, 'edit']"><i class="material-icons">edit</i></a>
     </h2>
     <div class="card-body row">
-      <div class="col s4">
-        Agencia: {{ wallet?.agency }}
-      </div>
-      <div class="col s4">
-        Numero: {{ wallet?.agency }}
-      </div>
-      <div class="col s4">
-        Saldo: R$ {{ wallet?.balance }}
+      <div class="col s12">
+        Tipo: {{ transactionType[transactionCategory?.transaction_type] }}
       </div>
       <div class="col s12">
-        {{ wallet?.description }}
+        Descrição: {{ transactionCategory?.description }}
       </div>
+
     </div>
   </app-card>
 

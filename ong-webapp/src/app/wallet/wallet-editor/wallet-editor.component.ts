@@ -1,46 +1,64 @@
+import { ApiService } from './../../api/api.service';
 import { Wallet } from './../wallet';
-import { WalletService } from './../../api/wallet.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
+import 'rxjs/add/operator/toPromise';
+
 @Component({
   selector: 'app-wallet-editor',
   templateUrl: './wallet-editor.component.html',
   styleUrls: ['./wallet-editor.component.css']
 })
 export class WalletEditorComponent implements OnInit {
-
   wallet: Wallet = null;
   loading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private walletService: WalletService,
-    private location: Location
+    private location: Location,
+    private apiService: ApiService
   ) {
     this.wallet = new Wallet();
     this.wallet.active = true;
   }
 
   ngOnInit() {
-    let walletId = this.route.snapshot.params['id'];
-    if (walletId){
-      this.walletService.getWallet(walletId).then(wallet => {
-        this.wallet = wallet;
-        this.loading = false;
-      }).catch(error => console.log(error))
+    const walletId = this.route.snapshot.params['id'];
+    if (walletId) {
+      this.apiService
+        .params(walletId)
+        .get('getWallet')
+        .toPromise()
+        .then(resp => {
+          this.wallet = resp.json() as Wallet;
+          this.loading = false;
+        })
+        .catch(error => console.log(error));
     }
   }
 
-  submit(){
-    this.walletService.setWallet(this.wallet)
-      .then(wallet => {
-        this.router.navigate(['/wallets', wallet.id])
-      })
+  submit() {
+    let request;
+    if (this.wallet.id) {
+      request = this.apiService
+        .data(this.wallet)
+        .params(this.wallet.id)
+        .put('updateWallet')
+        .toPromise();
+    } else {
+      request = this.apiService
+        .data(this.wallet)
+        .post('createWallet')
+        .toPromise();
+    }
+    request.then(resp => {
+      this.router.navigate(['/wallets', resp.json().id]);
+    });
   }
 
-  cancel(){
+  cancel() {
     this.location.back();
   }
 }

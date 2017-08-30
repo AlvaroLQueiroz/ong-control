@@ -1,27 +1,39 @@
-import { ActivatedRoute } from "@angular/router";
-import { Component, OnInit } from "@angular/core";
-
-import { WalletService } from "./../../api/wallet.service";
-import { Wallet } from "./../wallet";
+import { Page } from './../../core/pagination/page';
+import { ApiService } from './../../api/api.service';
+import { Observable, Subscription } from 'rxjs/Rx';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import 'rxjs/add/operator/toPromise';
+import { Wallet } from './../wallet';
 
 @Component({
-  selector: "app-wallet-list",
-  templateUrl: "./wallet-list.component.html",
-  styleUrls: ["./wallet-list.component.css"]
+  selector: 'app-wallet-list',
+  templateUrl: './wallet-list.component.html',
+  styleUrls: ['./wallet-list.component.css']
 })
-export class WalletListComponent implements OnInit {
+export class WalletListComponent implements OnInit, OnDestroy {
   wallets: Wallet[];
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private walletService: WalletService
-  ) {}
+  page: Page;
+  queryParamsSubscription: Subscription;
+  loading: boolean = true;
+  constructor(private activatedRoute: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.walletService.getWallets(params).then(resp => {
-        this.wallets = resp;
-      });
+    this.queryParamsSubscription = this.activatedRoute.queryParams.subscribe(params => {
+      this.apiService
+        .queryParams(params)
+        .get('listWallets')
+        .toPromise()
+        .then(resp => {
+          const response = resp.json();
+          this.wallets = response.results as Wallet[];
+          this.page = response.page as Page;
+          this.loading = false;
+        });
     });
+  }
+
+  ngOnDestroy() {
+    this.queryParamsSubscription.unsubscribe();
   }
 }
