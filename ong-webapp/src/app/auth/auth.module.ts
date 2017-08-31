@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 
-import { AuthService } from './../api/auth.service';
 
 @NgModule({
   imports: [
@@ -19,6 +18,6 @@ import { AuthService } from './../api/auth.service';
   ],
   declarations: [LoginComponent],
   exports: [LoginComponent],
-  providers: [AuthService],
+  providers: [],
 })
 export class AuthModule { }

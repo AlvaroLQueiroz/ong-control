@@ -1,6 +1,6 @@
-import { AuthService } from './../api/auth.service';
-import { Observable } from 'rxjs/Rx';
-import { Injectable } from '@angular/core';
+import { ApiService } from './../api/api.service';
+import { Observable, Subscription } from 'rxjs/Rx';
+import { Injectable, OnDestroy } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -9,10 +9,12 @@ import {
   CanLoad,
   Route
 } from '@angular/router';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class AuthGuard implements CanActivate, CanLoad {
-  constructor(private authService: AuthService, private router: Router) {}
+export class AuthGuard implements CanActivate, CanLoad{
+  apiSubscription: Subscription;
+  constructor(private apiService: ApiService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -26,16 +28,19 @@ export class AuthGuard implements CanActivate, CanLoad {
   }
 
   private checkAccess(next: string) {
-    if (this.authService.isAuthenticated()) {
-      return true;
-    }
-
-    if (next) {
-      this.router.navigate(['/login'], { queryParams: { next: next } });
-    } else {
-      this.router.navigate(['/login']);
-    }
-
-    return false;
+    let hasAccess = false;
+    this.apiSubscription = this.apiService.isAuthenticated.subscribe(isAuthenticated => {
+      if (isAuthenticated) {
+        hasAccess = true;
+      } else if (next) {
+        this.router.navigate(['/login'], { queryParams: { next: next } });
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
+    return hasAccess;
+  }
+  ngOnDestroy(){
+    this.apiSubscription.unsubscribe();
   }
 }

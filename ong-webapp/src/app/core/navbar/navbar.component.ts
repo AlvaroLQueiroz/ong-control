@@ -1,4 +1,5 @@
-import { AuthService } from './../../api/auth.service';
+import { User } from '../../api/user';
+import { ApiService } from './../../api/api.service';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
 
@@ -9,16 +10,19 @@ import { MaterializeAction } from 'angular2-materialize';
 })
 export class NavbarComponent implements OnInit {
   sideNavActions = new EventEmitter<string | MaterializeAction>();
+  user: User;
 
-  constructor(private authService: AuthService) {}
+  constructor(private apiService: ApiService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.user = this.apiService.getUser();
+  }
 
   sideNavOpen() {
     this.sideNavActions.emit({ action: 'sideNav', params: ['show'] });
   }
 
   logout() {
-    this.authService.logout();
+    this.apiService.logout();
   }
 }

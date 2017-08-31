@@ -4,8 +4,11 @@
       <a class="secondary-content" [routerLink]="['/transaction-category', transactionCategory?.id, 'edit']"><i class="material-icons">edit</i></a>
     </h2>
     <div class="card-body row">
-      <div class="col s12">
+      <div class="col s6">
         Tipo: {{ transactionType[transactionCategory?.transaction_type] }}
+      </div>
+      <div class="col s6">
+        Saldo: {{ transactionCategory?.balance | currency:'BRL':true }}
       </div>
       <div class="col s12">
         Descrição: {{ transactionCategory?.description }}

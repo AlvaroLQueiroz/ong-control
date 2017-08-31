@@ -1,8 +1,9 @@
+import { User, Login } from './user';
 import { Observable } from 'rxjs/Rx';
 import { RequestOptions, Headers, Http, RequestMethod, Response } from '@angular/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { environment } from './../../environments/environment';
-
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class ApiService {
   private _body: any = null;
@@ -10,6 +11,7 @@ export class ApiService {
   private _options: {} = null;
   private _params: any[] = null;
   private _qParams: string = null;
+  isAuthenticated = new BehaviorSubject<boolean>(false);
 
   constructor(private http: Http) {
     this._params = [];
@@ -20,9 +22,10 @@ export class ApiService {
         'Content-type': 'application/json'
       })
     };
+    this.isAuthenticated.next(localStorage.getItem('user') !== null);
     this._endpoints = {
       // #################### AUTH ####################
-      auth: () => '/api-token-auth/',
+      login: () => '/api-token-auth/',
       // #################### WALLETS ####################
       listWallets: () => '/wallets/',
       createWallet: () => '/wallets/',
@@ -45,26 +48,31 @@ export class ApiService {
     };
   }
 
-  setToken(token: string): void {
-    localStorage.setItem('userToken', token);
+  authenticate(login: Login) {
+    this.http
+      .post(this.url('login'), login)
+      .toPromise()
+      .then(resp => {
+        localStorage.setItem('user', resp.text());
+        this.isAuthenticated.next(true);
+      })
+      .catch(resp => {
+        this.isAuthenticated.next(false);
+      });
   }
 
   getToken(): string {
-    return localStorage.getItem('userToken');
+    const user = JSON.parse(localStorage.getItem('user') || '{}') as User;
+    return user ? user.auth_token : '';
   }
 
-  authenticate(token: string): void {
-    this.setToken(token);
-    localStorage.setItem('isAuthenticated', 'true');
-  }
-
-  isAuthenticated(): boolean {
-    return localStorage.getItem('isAuthenticated') === 'true';
+  getUser(): User {
+    return JSON.parse(localStorage.getItem('user') || '{}') as User;
   }
 
   logout(): void {
-    localStorage.setItem('userToken', '');
-    localStorage.setItem('isAuthenticated', 'false');
+    localStorage.removeItem('user');
+    this.isAuthenticated.next(false);
   }
 
   requestOptions(opt: {}): ApiService {
@@ -104,7 +112,6 @@ export class ApiService {
   }
 
   resolver(endpoint: string, method?: RequestMethod | string | null): Observable<Response> {
-    console.log(this.url(endpoint));
     return this.http.request(this.url(endpoint), this.getRequestOptions(method));
   }
 

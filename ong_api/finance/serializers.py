@@ -14,9 +14,14 @@ class WalletSerializer(serializers.ModelSerializer):
         return wallet.balance()
 
 class TransactionCategorySerializer(serializers.ModelSerializer):
+    balance = serializers.SerializerMethodField('calculate_balance')
+
     class Meta:
         model = TransactionCategory
-        fields = ('id', 'active', 'description', 'label', 'needs_nf', 'transaction_type')
+        fields = ('id', 'active', 'description', 'label', 'needs_nf', 'transaction_type', 'balance')
+
+    def calculate_balance(self, category):
+        return category.balance()
 
 
 class TransactionSerializer(serializers.ModelSerializer):

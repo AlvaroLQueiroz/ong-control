@@ -1,8 +1,9 @@
-import { AuthService } from './../../api/auth.service';
+import { Subscription } from 'rxjs/Rx';
+import { User, Login } from './../../api/user';
+import { ApiService } from '../../api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Login } from './login';
-import { Subscription } from 'rxjs/Rx';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-login',
@@ -10,37 +11,39 @@ import { Subscription } from 'rxjs/Rx';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  user: Login = {
-    username: null,
-    password: null
-  };
-  loginSubscription: Subscription = null;
-  next: string = null;
-  hasError: boolean = false;
-
+  login: Login;
+  next: string;
+  hasError: boolean;
+  apiSubscription: Subscription;
+  submmited: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
-  ) {}
+    private apiService: ApiService
+  ) {
+    this.login = new Login();
+    this.next = '';
+    this.hasError = false;
+    this.submmited = false;
+  }
 
   ngOnInit() {
     this.next = this.route.snapshot.queryParams['next'] || 'home';
-  }
-
-  ngOnDestroy() {
-    this.loginSubscription.unsubscribe();
+    this.apiSubscription = this.apiService.isAuthenticated.subscribe(isAuthenticated => {
+      if(isAuthenticated){
+        this.router.navigate([this.next]);
+      }else{
+        this.hasError = true;
+      }
+    });
   }
 
   submit() {
-    this.loginSubscription = this.authService.login(this.user).subscribe(
-      resp => {
-        this.hasError = false;
-        this.router.navigate([this.next]);
-      },
-      resp => {
-        this.hasError = true;
-      }
-    );
+    this.apiService.authenticate(this.login);
+    this.submmited = true;
+  }
+
+  ngOnDestroy(){
+    this.apiSubscription.unsubscribe();
   }
 }

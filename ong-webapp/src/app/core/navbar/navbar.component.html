@@ -1,9 +1,16 @@
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper">
-      <a class="button-collapse" data-activates="slide-out" materialize="sideNav" (click)="sideNavOpen()"><i class="material-icons">menu</i></a>
+      <a class="button-collapse" data-activates="slide-out" materialize="sideNav" (click)="sideNavOpen()">
+        <i class="material-icons">menu</i>
+      </a>
       <ul class="right hide-on-med-and-down">
-        <li><a class="dropdown-button" data-activates="user-submenu" materialize="dropdown" [materializeParams]="[{belowOrigin:true}]">Usuário inicial<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li>
+          <a class="dropdown-button" data-activates="user-submenu" materialize="dropdown" [materializeParams]="[{belowOrigin:true}]">
+            {{ user.first_name || user.username }} {{ user.last_name }}
+            <i class="material-icons right">arrow_drop_down</i>
+          </a>
+        </li>
       </ul>
     </div>
   </nav>

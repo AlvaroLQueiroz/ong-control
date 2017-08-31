@@ -5,17 +5,17 @@
       <form class="col s12" #loginForm="ngForm">
         <div class="row">
           <div class="input-field col s12">
-            <input id="user" type="text" class="validate" name="username" required [(ngModel)]="user.username">
+            <input id="user" type="text" class="validate" name="username" required [(ngModel)]="login.username">
             <label for="user">Usuário</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="password" type="password" class="validate" name="username" required [(ngModel)]="user.password">
+            <input id="password" type="password" class="validate" name="username" required [(ngModel)]="login.password">
             <label for="password">Senha</label>
           </div>
         </div>
-        <div class="row" [hidden]="!hasError">
+        <div class="row" [hidden]="!hasError || !submmited">
           <div class="col s12 center red-text bold">
             Usuário e/ou senha incorretos!
           </div>

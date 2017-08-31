@@ -32,6 +32,8 @@ INSTALLED_APPS = [
 
     'core',
     'finance',
+    'provider',
+    'user_profile',
 
     'rest_framework',
     'rest_framework.authtoken',
@@ -91,8 +93,8 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (

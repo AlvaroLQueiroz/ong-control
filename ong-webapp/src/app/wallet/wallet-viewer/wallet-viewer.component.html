@@ -11,7 +11,7 @@
       Numero: {{ wallet?.agency }}
     </div>
     <div class="col s4">
-      Saldo: R$ {{ wallet?.balance }}
+      Saldo: {{ wallet?.balance | currency:'BRL':true }}
     </div>
     <div class="col s12">
       {{ wallet?.description }}

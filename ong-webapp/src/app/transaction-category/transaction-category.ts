@@ -10,5 +10,6 @@ export class TransactionCategory {
   label: string;
   needs_nf: boolean;
   transaction_type: TransactionType;
+  balance: number;
 }
 

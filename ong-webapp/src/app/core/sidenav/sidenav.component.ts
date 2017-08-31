@@ -1,3 +1,5 @@
+import { User } from './../../api/user';
+import { ApiService } from './../../api/api.service';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
 
@@ -8,9 +10,12 @@ import { MaterializeAction } from 'angular2-materialize';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
+    this.user = this.apiService.getUser();
   }
 
 }

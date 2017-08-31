@@ -21,10 +21,11 @@ TRANSACTION_TYPE = (
     (TRANSACTION_OUTPUT, _('Output'))
 )
 
+
 class Wallet(models.Model):
     active = models.BooleanField(default=True)
     agency = models.CharField(max_length=256, null=True, blank=True)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     label = models.CharField(max_length=256, unique=True)
     number = models.CharField(max_length=256, null=True, blank=True)
 
@@ -43,7 +44,7 @@ class Wallet(models.Model):
             total=Sum(
                 Case(
                     When(active=True, category__transaction_type=TRANSACTION_INPUT, done=True, then=F('value')),
-                    When(active=True, category__transaction_type=TRANSACTION_OUTPUT, done=True, then=F('value')),
+                    When(active=True, category__transaction_type=TRANSACTION_OUTPUT, done=True, then=-1 * F('value')),
                     output_field=DecimalField()
                 )
             )
@@ -60,7 +61,7 @@ class Wallet(models.Model):
 
 class TransactionCategory(models.Model):
     active = models.BooleanField(default=True)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     label = models.CharField(max_length=256)
     needs_nf = models.BooleanField(default=True)
     transaction_type = models.PositiveSmallIntegerField(choices=TRANSACTION_TYPE)
@@ -81,16 +82,28 @@ class TransactionCategory(models.Model):
         self.active = False
         self.save()
 
+    def balance(self):
+        return self.transactions.aggregate(
+            total=Sum(
+                Case(
+                    When(active=True, category__transaction_type=TRANSACTION_INPUT, done=True, then=F('value')),
+                    When(active=True, category__transaction_type=TRANSACTION_OUTPUT, done=True, then=-1 * F('value')),
+                    output_field=DecimalField()
+                )
+            )
+        )['total'] or Decimal('0.0')
+
 
 class Transaction(models.Model):
     category = models.ForeignKey(TransactionCategory, on_delete=models.PROTECT, related_name='transactions')
     wallet = models.ForeignKey(Wallet, on_delete=models.PROTECT, related_name='transactions')
 
     active = models.BooleanField(default=True)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     done = models.BooleanField(default=False)
     due_date = models.DateField()
     value = models.DecimalField(max_digits=20, decimal_places=2)
+    # favored = models.ForeignKey(Provider, related_name='transactions')
 
     class Meta:
         verbose_name = _('transaction')
