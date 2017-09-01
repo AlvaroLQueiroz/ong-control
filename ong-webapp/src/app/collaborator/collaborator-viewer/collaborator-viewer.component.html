@@ -1,0 +1,19 @@
+<app-card [sizes]="'s12'" *ngIf="!loading">
+  <h2 class="card-title">
+    {{ collaborator?.user?.first_name || collaborator?.user?.username }} {{ collaborator?.user?.last_name }}
+    <a class="secondary-content" [routerLink]="['/collaborators', collaborator?.id, 'edit']"><i class="material-icons">edit</i></a>
+  </h2>
+  <div class="card-body row">
+    <div class="col s12 m6">
+      <p>Usuário: {{ collaborator?.user?.username }}</p>
+      <p>E-mail: {{ collaborator?.user?.email }}</p>
+      <p>Sexo: {{ collaborator?.genre }}</p>
+    </div>
+    <div class="col s12 m6">
+      <p>R.G.: {{ collaborator?.rg }}</p>
+      <p>C.P.F: {{ collaborator?.cpf }}</p>
+      <p>Aniversario: {{ collaborator?.birth_date }}</p>
+    </div>
+  </div>
+</app-card>
+

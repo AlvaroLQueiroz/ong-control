@@ -1,0 +1,27 @@
+<app-card sizes="s12">
+  <h1 class="card-title">Colaboradores</h1>
+  <div class="card-body">
+    <div *ngIf="!loading; else errorBlock">
+      <ul class="collection">
+        <li class="collection-item pointer" *ngFor="let collaborator of collaborators" [routerLink]="['/collaborators', collaborator.id]">
+          <h5 class="title">
+            {{ collaborator.user.first_name }} {{ collaborator.user.last_name }}
+            <a class="secondary-content" [routerLink]="['/collaborators', collaborator?.id, 'edit']"><i class="material-icons">edit</i></a>
+          </h5>
+        </li>
+      </ul>
+      <app-pagination [page]="page"></app-pagination>
+    </div>
+    <ng-template #errorBlock>
+      <p class="center-align" >
+        Nenhuma colaborador encontrado.<br>
+        <a class="pointer" [routerLink]="['/collaborators', 'add']">Clique aqui para adicionar um.</a>
+      </p>
+    </ng-template>
+  </div>
+</app-card>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red" [routerLink]="['/collaborators', 'add']">
+    <i class="large material-icons">add</i>
+  </a>
+</div>

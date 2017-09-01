@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^api-token-auth/', Login.as_view()),
     # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', include('finance.urls', namespace='finance')),
+    url(r'^', include('collaborator.urls', namespace='collaborator')),
 ]

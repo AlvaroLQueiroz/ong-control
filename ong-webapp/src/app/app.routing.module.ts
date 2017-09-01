@@ -36,6 +36,12 @@ const appRoutes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'collaborators',
+    loadChildren: 'app/collaborator/collaborator.module#CollaboratorModule',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard]
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'

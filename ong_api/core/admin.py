@@ -1,3 +1,6 @@
 from django.contrib import admin
+from core.models import Phone, PhoneOperator
 
-# Register your models here.
+
+admin.site.register(Phone)
+admin.site.register(PhoneOperator)

@@ -1,0 +1,30 @@
+[
+{
+  "model": "core.phoneoperator",
+  "pk": 1,
+  "fields": {
+    "label": "Vivo"
+  }
+},
+{
+  "model": "core.phoneoperator",
+  "pk": 2,
+  "fields": {
+    "label": "Tim"
+  }
+},
+{
+  "model": "core.phoneoperator",
+  "pk": 3,
+  "fields": {
+    "label": "Oi"
+  }
+},
+{
+  "model": "core.phoneoperator",
+  "pk": 4,
+  "fields": {
+    "label": "Claro"
+  }
+}
+]

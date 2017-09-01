@@ -110,8 +110,8 @@ class StreetKind(models.Model):
 
 
 class ZipCode(models.model):
-    kind = models.ForeignKey(StreetKind, on_delete=models.PROTECT, related_name='zipcodes')
     city = models.ForeignKey(City, on_delete=models.PROTECT, related_name='zipcodes')
+    kind = models.ForeignKey(StreetKind, on_delete=models.PROTECT, related_name='zipcodes')
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.PROTECT, related_name='zipcodes', null=True, blank=True)
 
     number = models.CharField(max_length=10, validators=[validate_zipcode], verbose_name="C.E.P.")

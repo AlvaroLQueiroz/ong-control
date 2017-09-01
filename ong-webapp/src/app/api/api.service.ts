@@ -44,7 +44,13 @@ export class ApiService {
       listWalletTransactions: (id: number) => `/transactions/wallet/${id}/`,
       listCategoryTransactions: (id: number) => `/transactions/category/${id}/`,
       getTransaction: (id: number) => `/transactions/${id}/`,
-      updateTransaction: (id: number) => `/transactions/${id}/update/`
+      updateTransaction: (id: number) => `/transactions/${id}/update/`,
+
+      // #################### COLLABORATORS ####################
+      listCollaborators: () => '/collaborators/',
+      createCollaborator: () => '/collaborators/',
+      getCollaborator: (id: number) => `/collaborators/${id}/`,
+      updateCollaborator: (id: number) => `/collaborators/${id}/`,
     };
   }
 
