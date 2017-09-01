@@ -17,7 +17,7 @@
 </div>
 
 <ul id="user-submenu" class="dropdown-content">
-  <li *ngIf="user.collaborator" ><a [routerLink]="['collaborators', user.collaborator?.id, 'edit']">Perfil</a></li>
+  <li *ngIf="user" ><a [routerLink]="['collaborators', user?.id, 'edit']">Perfil</a></li>
   <li class="divider"></li>
   <li><a (click)="logout()">Sair</a></li>
 </ul>
