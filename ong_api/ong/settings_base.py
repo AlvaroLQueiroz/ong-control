@@ -92,7 +92,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/webapps/ong-control/ong_api/static/',
 ]
-STATIC_ROOT = '/webapps/ong-control/ong_api/static/'
+STATIC_ROOT = '/webapps/ong-control/ong_api/static/dist'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
