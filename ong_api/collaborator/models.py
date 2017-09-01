@@ -21,7 +21,7 @@ class Collaborator(models.Model):
     genre = models.CharField(max_length=2, choices=GENRES)
 
     cep = models.CharField(max_length=10)
-    logradouro = models.CharField(max_length=256)
+    logradouro = models.CharField(max_length=255)
     complemento = models.CharField(max_length=128)
     bairro = models.CharField(max_length=128)
     localidade = models.CharField(max_length=128)

@@ -24,10 +24,10 @@ TRANSACTION_TYPE = (
 
 class Wallet(models.Model):
     active = models.BooleanField(default=True)
-    agency = models.CharField(max_length=256, null=True, blank=True)
+    agency = models.CharField(max_length=128, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    label = models.CharField(max_length=256, unique=True)
-    number = models.CharField(max_length=256, null=True, blank=True)
+    label = models.CharField(max_length=128, unique=True)
+    number = models.CharField(max_length=128, null=True, blank=True)
 
     objects = WalletManager()
 
