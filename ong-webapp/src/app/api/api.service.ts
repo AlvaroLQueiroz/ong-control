@@ -1,8 +1,8 @@
+import { environment } from './../../environments/environment.prod';
 import { User, Login } from './user';
 import { Observable } from 'rxjs/Rx';
 import { RequestOptions, Headers, Http, RequestMethod, Response } from '@angular/http';
 import { Injectable, EventEmitter } from '@angular/core';
-import { environment } from './../../environments/environment';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class ApiService {
@@ -104,7 +104,7 @@ export class ApiService {
   }
 
   url(endpoint: string): string {
-    return `${environment.apiAddress}:${environment.apiPort}${this._endpoints[endpoint](
+    return `${environment.apiAddress}:${environment.apiPort}${environment.postfix}${this._endpoints[endpoint](
       this._params
     )}?${this._qParams}`;
   }

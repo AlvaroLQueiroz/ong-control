@@ -7,4 +7,5 @@ export const environment = {
   production: false,
   apiAddress: 'http://10.0.75.1',
   apiPort: '8000',
+  postfix: '',
 };
