@@ -1,10 +1,16 @@
+from core.serializers import UserSerializer
 from rest_framework import parsers, renderers
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from core.serializers import UserSerializer
-import logging
+from django.views.generic.base import TemplateView
+
+
+class Home(TemplateView):
+    template_name = 'index.html'
+
+
 class Login(APIView):
     throttle_classes = ()
     permission_classes = ()
@@ -36,4 +42,3 @@ class Logout(APIView):
         logging.warning(user)
         token, created = Token.objects.get_or_create(user=user)
         return Response({'token': token.key})
-

@@ -55,7 +55,7 @@ ROOT_URLCONF = 'ong.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/webapps/ong-control/ong_api/static/dist'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

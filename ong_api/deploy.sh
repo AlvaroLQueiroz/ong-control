@@ -5,4 +5,5 @@ python manage.py loaddata fixtures/users.json
 python manage.py loaddata fixtures/phone_operators.json
 python manage.py collectstatic --noinput
 cp ../apache/ong-control.conf /etc/apache2/sites-available/ong-control.conf
-service apache2 restart
+cp -a ../ong-webapp/dist/. /static/dist/
+python manage.py runserver 0.0.0.0
