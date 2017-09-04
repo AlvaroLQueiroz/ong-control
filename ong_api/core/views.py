@@ -23,7 +23,6 @@ class Login(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-        logging.warning(UserSerializer(user).data)
         return Response(UserSerializer(user).data)
 
 
