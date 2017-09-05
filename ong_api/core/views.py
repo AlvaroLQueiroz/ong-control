@@ -7,10 +7,6 @@ from rest_framework.views import APIView
 from django.views.generic.base import TemplateView
 
 
-class Home(TemplateView):
-    template_name = 'index.html'
-
-
 class Login(APIView):
     throttle_classes = ()
     permission_classes = ()
