@@ -13,6 +13,7 @@ class WalletSerializer(serializers.ModelSerializer):
     def calculate_balance(self, wallet):
         return wallet.balance()
 
+
 class TransactionCategorySerializer(serializers.ModelSerializer):
     balance = serializers.SerializerMethodField('calculate_balance')
 
