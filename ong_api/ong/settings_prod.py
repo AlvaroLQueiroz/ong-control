@@ -24,9 +24,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ongcontrol',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ong_control',
+        'USER': 'ong_control',
+        'PASSWORD': 'ong_control_123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
