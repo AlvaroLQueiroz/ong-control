@@ -28,13 +28,13 @@
         <div class="row">
           <div class="input-field col s12 m6">
             <select name="category" [(ngModel)]="transaction.category" materialize="material_select" [materializeSelectOptions]="categories">
-                <option [value]="category.id" *ngFor="let category of categories">{{ category.label }}</option>
+                <option [ngValue]="category" *ngFor="let category of categories">{{ category.label }}</option>
               </select>
             <label>Categoria</label>
           </div>
           <div class="input-field col s12 m6">
             <select name="wallet" [(ngModel)]="transaction.wallet" materialize="material_select" [materializeSelectOptions]="wallets">
-                <option [value]="wallet.id" *ngFor="let wallet of wallets">{{ wallet.label }}</option>
+                <option [ngValue]="wallet" *ngFor="let wallet of wallets">{{ wallet.label }}</option>
               </select>
             <label>Carteira</label>
           </div>
@@ -50,8 +50,8 @@
         <div class="row">
           <p>
             <input class="with-gap" name="done" type="checkbox" id="done" [(ngModel)]="transaction.done" />
-            <label for="done" *ngIf="transaction.category == 1">Recebida</label>
-            <label for="done" *ngIf="transaction.category == 2">Paga</label>
+            <label for="done" *ngIf="transaction.category?.transaction_type == 1">Recebida</label>
+            <label for="done" *ngIf="transaction.category?.transaction_type == 2">Paga</label>
           </p>
         </div>
 

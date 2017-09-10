@@ -26,6 +26,8 @@ export class TransactionEditorComponent implements OnInit {
     private apiService: ApiService
   ) {
     this.transaction = new Transaction();
+    this.transaction.category = new TransactionCategory();
+    this.transaction.wallet = new Wallet();
     this.transaction.active = true;
   }
 

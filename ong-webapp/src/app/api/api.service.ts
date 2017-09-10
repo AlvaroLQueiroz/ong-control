@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment.prod';
+import { environment } from './../../environments/environment';
 import { User, Login } from './user';
 import { Observable } from 'rxjs/Rx';
 import { RequestOptions, Headers, Http, RequestMethod, Response } from '@angular/http';
@@ -40,11 +40,12 @@ export class ApiService {
 
       // #################### TRANSACTIONS ####################
       listTransactions: () => '/transactions/',
-      createTransaction: () => '/transactions/add/',
+      createTransaction: () => '/transactions/',
       listWalletTransactions: (id: number) => `/transactions/wallet/${id}/`,
       listCategoryTransactions: (id: number) => `/transactions/category/${id}/`,
       getTransaction: (id: number) => `/transactions/${id}/`,
-      updateTransaction: (id: number) => `/transactions/${id}/update/`,
+      updateTransaction: (id: number) => `/transactions/${id}/`,
+      exportTransactions: () => `/transactions/csv/`,
 
       // #################### COLLABORATORS ####################
       listCollaborators: () => '/collaborators/',
@@ -106,7 +107,7 @@ export class ApiService {
   url(endpoint: string): string {
     return `${environment.apiAddress}:${environment.apiPort}${environment.postfix}${this._endpoints[endpoint](
       this._params
-    )}?${this._qParams}`;
+    )}` + (this._qParams ? `?${this._qParams}` : '');
   }
 
   getRequestOptions(method: RequestMethod | string | null): RequestOptions {

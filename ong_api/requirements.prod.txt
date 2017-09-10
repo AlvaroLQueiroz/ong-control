@@ -4,3 +4,4 @@ djangorestframework==3.6.1
 uwsgi
 django-cors-headers==1.2.0
 pytz
+djangorestframework-csv

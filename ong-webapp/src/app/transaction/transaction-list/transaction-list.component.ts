@@ -43,7 +43,25 @@ export class TransactionListComponent implements OnInit, OnDestroy {
       });
     });
   }
-
+  export_csv(){
+    var params = {}
+    if (this.categoryId){
+      params['category_id'] = this.categoryId;
+    }
+    if (this.walletId){
+      params['wallet_id'] = this.walletId;
+    }
+    this.apiService.queryParams(params).get('exportTransactions').toPromise().then(resp => {
+      var a = document.createElement('a');
+      var blob = new Blob([resp.text()], {type: resp.headers.get('content-type')});
+      var url = window.URL.createObjectURL(blob);
+      var now = new Date();
+      a.href = url;
+      a.download = `Transações-${now.getDay()}-${now.getMonth()}-${now.getFullYear()}.csv`
+      a.click();
+      window.URL.revokeObjectURL(url);
+    })
+  }
   ngOnDestroy() {
     this.queryParamsSubscription.unsubscribe();
   }
