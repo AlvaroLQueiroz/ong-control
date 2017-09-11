@@ -31,7 +31,7 @@ class TransactionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Transaction
-        fields = ('id', 'active', 'description', 'done', 'due_date', 'value', 'category', 'wallet')
+        fields = ('id', 'active', 'description', 'done', 'due_date', 'value', 'operation_number', 'category', 'wallet')
 
     def create(self, validated_data):
         category_data = self.initial_data.pop('category')

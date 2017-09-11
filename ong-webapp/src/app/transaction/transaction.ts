@@ -6,8 +6,9 @@ export class Transaction {
   active: boolean;
   description: string;
   done: boolean;
-  due_date: Date;
+  due_date: string;
   value: number;
+  operation_number: string;
 
   category: TransactionCategory;
   wallet: Wallet;

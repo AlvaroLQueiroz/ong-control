@@ -7,6 +7,8 @@ import { Transaction } from '../transaction';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-transaction-editor',
   templateUrl: './transaction-editor.component.html',
@@ -63,6 +65,7 @@ export class TransactionEditorComponent implements OnInit {
 
   submit() {
     let request;
+    this.transaction.due_date = moment(this.transaction.due_date, 'DD/MM/YYYY').format('YYYY-MM-DD');
     if (this.transaction.id) {
       request = this.apiService
         .data(this.transaction)

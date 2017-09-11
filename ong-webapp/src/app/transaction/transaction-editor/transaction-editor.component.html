@@ -15,13 +15,17 @@
         </div>
 
         <div class="row">
-          <div class="input-field col s12 m6">
-            <input id="due_date" type="text" required name="due_date" class="datepicker" [(ngModel)]="transaction.due_date" materialize="pickadate" [materializeParams]="[{format: 'yyyy-mm-dd'}]">
+          <div class="input-field col s12 m3">
+            <input id="due_date" type="text" required name="due_date" class="datepicker" [(ngModel)]="transaction.due_date" materialize="pickadate" [materializeParams]="[{format: 'dd/mm/yyyy', formatSubmit: 'yyyy-mm-dd', closeOnSelect: true, selectYears: 1980}]">
             <label for="label">Data de realização</label>
           </div>
-          <div class="input-field col s12 m6">
+          <div class="input-field col s12 m4">
             <input id="value" type="text" required name="value" [(ngModel)]="transaction.value">
             <label for="value">Valor</label>
+          </div>
+          <div class="input-field col s12 m5">
+            <input id="operation_number" type="text" required name="operation_number" [(ngModel)]="transaction.operation_number">
+            <label for="operation_number">Número da operação</label>
           </div>
         </div>
 

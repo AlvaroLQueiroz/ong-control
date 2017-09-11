@@ -46,6 +46,7 @@ export class ApiService {
       getTransaction: (id: number) => `/transactions/${id}/`,
       updateTransaction: (id: number) => `/transactions/${id}/`,
       exportTransactions: () => `/transactions/csv/`,
+      chartTransactions: () => `/transactions/chart/`,
 
       // #################### COLLABORATORS ####################
       listCollaborators: () => '/collaborators/',

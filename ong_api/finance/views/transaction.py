@@ -1,18 +1,23 @@
-from rest_framework import generics
-from finance.models import Transaction
+import csv
+from datetime import datetime
+
+from django.db.models import Sum
+from django.http import HttpResponse
+
+from finance.models import Transaction, TransactionCategory, Wallet
 from finance.serializers import TransactionSerializer
+from rest_framework import generics
+from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_csv import renderers as r
-from datetime import datetime
-from django.http import HttpResponse
-import csv
 
 __all__ = [
     'TransactionList',
     'TransactionDetail',
     'WalletTransactionList',
     'CategoryTransactionList',
-    'TransactionToCsv',
+    'TransactionsToCsv',
+    'TransactionsChart',
 ]
 
 
@@ -45,8 +50,19 @@ class CategoryTransactionList(generics.ListAPIView):
         return super(CategoryTransactionList, self).get_queryset(*args, **kwargs).filter(category=self.kwargs.get('pk'))
 
 
-class TransactionToCsv(APIView):
+class TransactionsChart(APIView):
+    def get(self, request):
+        if request.GET.get('type', False) == 'category':
+            labels = TransactionCategory.objects.filter(active=True).values_list('label', flat=True)
+            data = TransactionCategory.objects.annotate(total=Sum('transactions__value')).values_list('total', flat=True)
+        if request.GET.get('type', False) == 'wallet':
+            labels = Wallet.objects.filter(active=True).values_list('label', flat=True)
+            data = Wallet.objects.annotate(total=Sum('transactions__value')).values_list('total', flat=True)
 
+        return Response({'labels': labels, 'data': data})
+
+
+class TransactionsToCsv(APIView):
     def get(self, request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="Transações-{date}"'.format(date=datetime.today().strftime('%d-%m-%Y'))

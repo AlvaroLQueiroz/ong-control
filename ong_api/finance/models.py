@@ -103,6 +103,7 @@ class Transaction(models.Model):
     done = models.BooleanField(default=False)
     due_date = models.DateField()
     value = models.DecimalField(max_digits=20, decimal_places=2)
+    operation_number = models.CharField(max_length=32)
     # favored = models.ForeignKey(Provider, related_name='transactions')
 
     class Meta:

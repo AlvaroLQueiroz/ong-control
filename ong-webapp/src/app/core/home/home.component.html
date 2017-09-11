@@ -1,3 +1,12 @@
-<p>
-  home works!
-</p>
+<app-card [sizes]="'s12 m6'" *ngIf="categoryData" >
+  <h1 class="card-title">Categoria</h1>
+  <div class="card-body" style="display: block">
+    <canvas baseChart [data]="categoryData" [labels]="categoryLabels" [chartType]="categoryType" [options]="{legend:{position:'bottom'}}"></canvas>
+  </div>
+</app-card>
+<app-card [sizes]="'s12 m6'" *ngIf="walletData" >
+  <h1 class="card-title">Carteira</h1>
+  <div class="card-body" style="display: block">
+    <canvas baseChart [data]="walletData" [labels]="walletLabels" [chartType]="walletType" [options]="{legend:{position:'bottom'}}"></canvas>
+  </div>
+</app-card>

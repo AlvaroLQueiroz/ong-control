@@ -13,6 +13,6 @@ urlpatterns = [
     url(r'transaction-category/$', TransactionCategoryList.as_view()),
     url(r'transaction-category/(?P<pk>\d+)/$', TransactionCategoryDetail.as_view()),
 
-    url(r'transactions/csv/$', TransactionToCsv.as_view()),
-
+    url(r'transactions/chart/$', TransactionsChart.as_view()),
+    url(r'transactions/csv/$', TransactionsToCsv.as_view()),
 ]
