@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
-from core.models import Phone, PhoneOperator
+from core.models import Phone, TelephoneCompany
 from rest_framework import serializers
 
 
@@ -19,22 +19,22 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
 
-class PhoneOperatorSerialize(serializers.ModelSerializer):
+class TelephoneCompanySerializer(serializers.ModelSerializer):
     class Meta:
-        model = PhoneOperator
-        fields = ('id', 'label')
+        model = TelephoneCompany
+        fields = ('id', 'label', 'brand')
 
 
 class PhoneSerializer(serializers.ModelSerializer):
-    operator = PhoneOperatorSerialize()
+    company = TelephoneCompanySerializer()
 
     class Meta:
         model = Phone
-        fields = ['id', 'number', 'operator']
+        fields = ['id', 'number', 'company']
 
     def create(self, validated_data):
-        operator_data = validated_data.pop('operator')
-        operator = PhoneOperator.objects.create(**operator_data)
+        company_data = validated_data.pop('company')
+        company = TelephoneCompany.objects.create(**company_data)
         phone = Phone.objects.create(
-            operator=operator, **validated_data)
+            operator=company, **validated_data)
         return phone

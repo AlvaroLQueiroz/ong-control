@@ -1,0 +1,27 @@
+<app-card sizes="s12">
+  <h1 class="card-title">Beneficiários</h1>
+  <div class="card-body">
+    <div *ngIf="!loading; else errorBlock">
+      <ul class="collection">
+        <li class="collection-item pointer" *ngFor="let beneficiary of beneficiaries" [routerLink]="['/beneficiaries', beneficiary.id]">
+          <h5 class="title">
+            {{ beneficiary.user.first_name }} {{ beneficiary.user.last_name }}
+            <a class="secondary-content" [routerLink]="['/beneficiaries', beneficiary?.id, 'edit']"><i class="material-icons">edit</i></a>
+          </h5>
+        </li>
+      </ul>
+      <app-pagination [page]="page"></app-pagination>
+    </div>
+    <ng-template #errorBlock>
+      <p class="center-align" >
+        Nenhum beneficiário encontrado.<br>
+        <a class="pointer" [routerLink]="['/beneficiaries', 'add']">Clique aqui para adicionar um.</a>
+      </p>
+    </ng-template>
+  </div>
+</app-card>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red" [routerLink]="['/beneficiaries', 'add']">
+    <i class="large material-icons">add</i>
+  </a>
+</div>

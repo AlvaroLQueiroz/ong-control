@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'core',
     'collaborator',
     'finance',
+    'user_profile',
 
     'rest_framework',
     'rest_framework.authtoken',

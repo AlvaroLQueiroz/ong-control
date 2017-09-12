@@ -53,6 +53,12 @@ export class ApiService {
       createCollaborator: () => '/collaborators/',
       getCollaborator: (id: number) => `/collaborators/${id}/`,
       updateCollaborator: (id: number) => `/collaborators/${id}/`,
+
+      // #################### BENEFICIARY ####################
+      listBeneficiaries: () => '/profiles/',
+      createBeneficiary: () => '/profiles/',
+      getBeneficiary: (id: number) => `/profiles/${id}/`,
+      updateBeneficiary: (id: number) => `/profiles/${id}/`,
     };
   }
 

@@ -1,3 +1,4 @@
+import { BeneficiaryModule } from './beneficiary/beneficiary.module';
 import { AddressModule } from './address/address.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -9,7 +10,6 @@ import { AppRoutingModule } from './app.routing.module';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthModule } from './auth/auth.module';
 import { HomeComponent } from './core/home/home.component';
-import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { ProfileModule } from './profile/profile.module';
     AuthModule,
     BrowserModule,
     CoreModule,
-    ProfileModule,
+    BeneficiaryModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

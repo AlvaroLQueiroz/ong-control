@@ -7,7 +7,8 @@
     <div class="col s12 m6">
       <p>Usuário: {{ collaborator?.user?.username }}</p>
       <p>E-mail: {{ collaborator?.user?.email }}</p>
-      <p>Sexo: {{ collaborator?.genre }}</p>
+      <p *ngIf="beneficiary?.genre == 1" >Sexo: Feminino</p>
+      <p *ngIf="beneficiary?.genre == 2" >Sexo: Masculino</p>
     </div>
     <div class="col s12 m6">
       <p>R.G.: {{ collaborator?.rg }}</p>

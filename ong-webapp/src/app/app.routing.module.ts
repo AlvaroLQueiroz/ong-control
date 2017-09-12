@@ -42,6 +42,12 @@ const appRoutes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'beneficiaries',
+    loadChildren: 'app/beneficiary/beneficiary.module#BeneficiaryModule',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard]
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'

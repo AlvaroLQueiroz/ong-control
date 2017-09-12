@@ -1,0 +1,20 @@
+<app-card [sizes]="'s12'" *ngIf="!loading">
+  <h2 class="card-title">
+    {{ beneficiary?.user?.first_name || beneficiary?.user?.username }} {{ beneficiary?.user?.last_name }}
+    <a class="secondary-content" [routerLink]="['/beneficiaries', beneficiary?.id, 'edit']"><i class="material-icons">edit</i></a>
+  </h2>
+  <div class="card-body row">
+    <div class="col s12 m6">
+      <p>Usuário: {{ beneficiary?.user?.username }}</p>
+      <p>E-mail: {{ beneficiary?.user?.email }}</p>
+      <p *ngIf="beneficiary?.genre == 1" >Sexo: Feminino</p>
+      <p *ngIf="beneficiary?.genre == 2" >Sexo: Masculino</p>
+    </div>
+    <div class="col s12 m6">
+      <p>R.G.: {{ beneficiary?.rg }}</p>
+      <p>C.P.F: {{ beneficiary?.cpf }}</p>
+      <p>Aniversario: {{ beneficiary?.birth_date }}</p>
+    </div>
+  </div>
+</app-card>
+

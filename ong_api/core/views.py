@@ -1,10 +1,20 @@
-from core.serializers import UserSerializer
-from rest_framework import parsers, renderers
+from django.views.generic.base import TemplateView
+
+from core.models import TelephoneCompany
+from core.serializers import UserSerializer, TelephoneCompanySerializer
+from rest_framework import generics, parsers, renderers
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.views.generic.base import TemplateView
+
+
+__all__ = [
+    'Login',
+    'Logout',
+    'TelephoneCompanyList',
+    'TelephoneCompanyDetail',
+]
 
 
 class Login(APIView):
@@ -37,3 +47,14 @@ class Logout(APIView):
         logging.warning(user)
         token, created = Token.objects.get_or_create(user=user)
         return Response({'token': token.key})
+
+
+class TelephoneCompanyList(generics.ListCreateAPIView):
+    queryset = TelephoneCompany.objects.all()
+    serializer_class = TelephoneCompanySerializer
+
+
+class TelephoneCompanyDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = TelephoneCompany.objects.all()
+    serializer_class = TelephoneCompanySerializer
+
