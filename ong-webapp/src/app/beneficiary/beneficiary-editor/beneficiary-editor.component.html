@@ -1,3 +1,118 @@
-<p>
-  beneficiary-editor works!
-</p>
+<app-card [sizes]="'s12'" *ngIf="!loading">
+  <h2 class="card-title">Editor de beneficiario</h2>
+  <div class="card-body">
+    <div class="row">
+      <form #wForm class="col s12" #beneficiaryForm="ngForm" (ngSubmit)="submit()">
+        <div class="row">
+          <div class="switch center-align">
+            <label>
+                  Desativado
+                  <input type="checkbox" name="active" [(ngModel)]="beneficiary.user.is_active">
+                  <span class="lever"></span>
+                  Ativo
+                </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input id="username" type="text" required name="username" [(ngModel)]="beneficiary.user.username">
+            <label for="username">Username</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <input id="email" type="text" name="email" [(ngModel)]="beneficiary.user.email">
+            <label for="email">E-mail</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input id="first_name" type="text" required name="first_name" [(ngModel)]="beneficiary.user.first_name">
+            <label for="first_name">Nome</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <input id="last_name" type="text" name="last_name" [(ngModel)]="beneficiary.user.last_name">
+            <label for="last_name">Sobrenome</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input id="rg" type="text" required name="rg" [(ngModel)]="beneficiary.rg">
+            <label for="rg">R.G.</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <input id="cpf" type="text" name="cpf" [(ngModel)]="beneficiary.cpf">
+            <label for="cpf">C.P.F.</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input id="birth_date" type="text" required name="birth_date" class="datepicker" [(ngModel)]="beneficiary.birth_date" materialize="pickadate"
+              [materializeParams]="[{format: 'yyyy-mm-dd'}]">
+            <label for="birth_date">Data de nascimento</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <select name="genre" [(ngModel)]="beneficiary.genre" materialize="material_select" [materializeSelectOptions]="genres">
+                <option [value]="genre.id" *ngFor="let genre of genres">{{ genre.label }}</option>
+                </select>
+            <label>Sexo</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <select multiple name="guardians" [(ngModel)]="beneficiary.guardians" materialize="material_select" [materializeSelectOptions]="guardians">
+              <option value="" disabled>-----------------------------</option>
+              <option [value]="guardian?.user?.id" *ngFor="let guardian of beneficiaries">{{ guardian?.user?.first_name }} {{ guardian?.user?.last_name }}</option>
+            </select>
+            <label>Responsáveis</label>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <h5 >Endereço</h5>
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input id="cep" type="text" required name="cep" [(ngModel)]="beneficiary.cep" (keyup)="searchCep($event.target.value)">
+            <label for="cep">C.E.P.</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m8">
+            <input id="logradouro" type="text" name="logradouro" [(ngModel)]="beneficiary.logradouro">
+            <label for="logradouro">Logradouro</label>
+          </div>
+          <div class="input-field col s12 m4">
+            <input id="complemento" type="text" required name="complemento" [(ngModel)]="beneficiary.complemento">
+            <label for="complemento">Complemento</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="bairro" type="text" name="bairro" [(ngModel)]="beneficiary.bairro">
+            <label for="bairro">Bairro</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m8">
+            <input id="localidade" type="text" required name="localidade" [(ngModel)]="beneficiary.localidade">
+            <label for="localidade">Cidade</label>
+          </div>
+          <div class="input-field col s12 m4">
+            <input id="uf" type="text" name="uf" [(ngModel)]="beneficiary.uf">
+            <label for="uf">Estado</label>
+          </div>
+        </div>
+        <div class="row center-align">
+            <a class="btn waves-effect orange" (click)="cancel()"><i class="material-icons left">close</i>Cancelar</a>
+            <button type="submit" class="btn waves-effect"><i class="material-icons left">save</i>Salvar</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</app-card>

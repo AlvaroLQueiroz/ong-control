@@ -1,3 +1,4 @@
+import logging
 from core.serializers import PhoneSerializer, UserSerializer
 from rest_framework import serializers
 from user_profile.models import Profile
@@ -36,7 +37,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         user_data = validated_data.pop('user')
         phones_data = validated_data.pop('phones')
         guardians_data = validated_data.pop('guardians')
-
         for field, value in user_data.items():
             setattr(instance.user, field, value)
         for field, value in validated_data.items():
@@ -49,5 +49,6 @@ class ProfileSerializer(serializers.ModelSerializer):
             phone = Phone.objects.get_or_create(**phone_data)[0]
             phone.save()
             instance.phones.add(phone)
+        instance.user.save()
         instance.save()
         return instance

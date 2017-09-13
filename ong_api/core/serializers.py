@@ -1,8 +1,15 @@
-from django.contrib.auth.models import User
+import logging
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
 from core.models import Phone, TelephoneCompany
 from rest_framework import serializers
+
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ('id', 'name')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,6 +24,29 @@ class UserSerializer(serializers.ModelSerializer):
                 'validators': [UnicodeUsernameValidator()]
             }
         }
+
+    #     def create(self, validated_data):
+    #         groups_data = validated_data.pop('groups')
+    #         token = validated_data.pop('auth_token')
+    #         user = User.objects.create(**validated_data)
+    #         for group_data in groups_data:
+    #             logging.warning(group_data)
+    #             group = Group.objects.get_or_create(**group_data)[0]
+    #             group.save()
+    #             user.groups.add(group)
+    #         return user
+
+    # def update(self, instance, validated_data):
+    #     groups_data = validated_data.pop('groups')
+    #     token = validated_data.pop('auth_token')
+    #     for field, value in validated_data.items():
+    #         setattr(instance, field, value)
+    #     for group_data in groups_data:
+    #         group = Group.objects.get_or_create(**group_data)[0]
+    #         group.save()
+    #         instance.groups.add(group)
+    #     instance.save()
+    #     return instance
 
 
 class TelephoneCompanySerializer(serializers.ModelSerializer):

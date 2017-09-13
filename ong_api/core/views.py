@@ -1,7 +1,7 @@
 from django.views.generic.base import TemplateView
-
+from django.contrib.auth.models import Group
 from core.models import TelephoneCompany
-from core.serializers import UserSerializer, TelephoneCompanySerializer
+from core.serializers import UserSerializer, TelephoneCompanySerializer, GroupSerializer
 from rest_framework import generics, parsers, renderers
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
@@ -14,6 +14,8 @@ __all__ = [
     'Logout',
     'TelephoneCompanyList',
     'TelephoneCompanyDetail',
+    'GroupList',
+    'GroupDetail',
 ]
 
 
@@ -58,3 +60,12 @@ class TelephoneCompanyDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = TelephoneCompany.objects.all()
     serializer_class = TelephoneCompanySerializer
 
+
+class GroupList(generics.ListCreateAPIView):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+
+class GroupDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
