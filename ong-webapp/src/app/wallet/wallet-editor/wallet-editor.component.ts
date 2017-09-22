@@ -1,8 +1,10 @@
-import { ApiService } from './../../api/api.service';
-import { Wallet } from './../wallet';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
+
+import { ApiService } from './../../api/api.service';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Wallet } from './../wallet';
+
 import 'rxjs/add/operator/toPromise';
 
 @Component({
@@ -13,7 +15,6 @@ import 'rxjs/add/operator/toPromise';
 export class WalletEditorComponent implements OnInit {
   wallet: Wallet = null;
   loading: boolean = true;
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -23,7 +24,6 @@ export class WalletEditorComponent implements OnInit {
     this.wallet = new Wallet();
     this.wallet.active = true;
   }
-
   ngOnInit() {
     const walletId = this.route.snapshot.params['id'];
     if (walletId) {
@@ -38,7 +38,6 @@ export class WalletEditorComponent implements OnInit {
         .catch(error => console.log(error));
     }
   }
-
   submit() {
     let request;
     if (this.wallet.id) {
@@ -57,7 +56,6 @@ export class WalletEditorComponent implements OnInit {
       this.router.navigate(['/wallets', resp.json().id]);
     });
   }
-
   cancel() {
     this.location.back();
   }

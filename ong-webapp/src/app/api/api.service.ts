@@ -25,6 +25,7 @@ export class ApiService {
     this.isAuthenticated.next(localStorage.getItem('user') !== null);
     this._endpoints = {
       // #################### AUTH ####################
+
       login: () => '/api-token-auth/',
       // #################### WALLETS ####################
       listWallets: () => '/wallets/',

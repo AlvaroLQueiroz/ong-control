@@ -7,9 +7,6 @@
       <div class="col s6">
         Tipo: {{ transactionType[transactionCategory?.transaction_type] }}
       </div>
-      <div class="col s6">
-        Saldo: {{ transactionCategory?.balance | currency:'BRL':true }}
-      </div>
       <div class="col s12">
         Descrição: {{ transactionCategory?.description }}
       </div>

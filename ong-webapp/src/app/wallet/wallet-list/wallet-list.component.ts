@@ -1,10 +1,12 @@
-import { Page } from './../../core/pagination/page';
-import { ApiService } from './../../api/api.service';
-import { Observable, Subscription } from 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import 'rxjs/add/operator/toPromise';
+
+import { ApiService } from './../../api/api.service';
+import { Observable, Subscription } from 'rxjs/Rx';
+import { Page } from './../../core/pagination/page';
 import { Wallet } from './../wallet';
+
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-wallet-list',

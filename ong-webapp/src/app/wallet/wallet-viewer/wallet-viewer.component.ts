@@ -1,7 +1,9 @@
-import { ApiService } from '../../api/api.service';
-import { Wallet } from './../wallet';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+
+import { ApiService } from '../../api/api.service';
+import { Wallet } from './../wallet';
+
 import 'rxjs/add/operator/toPromise';
 
 @Component({
