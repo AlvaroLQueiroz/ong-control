@@ -22,6 +22,7 @@ __all__ = [
 class Login(APIView):
     throttle_classes = ()
     permission_classes = ()
+    authentication_classes = ()
     parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
     renderer_classes = (renderers.JSONRenderer,)
     serializer_class = AuthTokenSerializer
