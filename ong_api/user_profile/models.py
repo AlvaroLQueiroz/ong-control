@@ -6,7 +6,7 @@ from core import GENRES
 class Profile(models.Model):
     user = models.OneToOneField('auth.User', verbose_name='usuário')
     phones = models.ManyToManyField(Phone, related_name='phones')
-    guardians = models.ManyToManyField('auth.User', related_name='protecteds', null=True, blank=True)
+    guardians = models.ManyToManyField('auth.User', related_name='protecteds', blank=True)
 
     active = models.BooleanField(default=True)
     cpf = models.CharField(max_length=16)

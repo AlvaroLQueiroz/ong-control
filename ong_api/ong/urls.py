@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^api/', include('finance.urls', namespace='finance')),
     url(r'^api/', include('collaborator.urls', namespace='collaborator')),
     url(r'^api/', include('user_profile.urls', namespace='profile')),
-    url(r'^', include('core.urls', namespace='core')),
+    url(r'^api/', include('core.urls', namespace='core')),
 ]

@@ -9,7 +9,7 @@ from core.models import Phone
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     phones = PhoneSerializer(many=True)
-    guardians = UserSerializer(many=True)
+    guardians = UserSerializer(many=True, required=False)
 
     class Meta:
         model = Profile
@@ -19,7 +19,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.pop('user')
         phones_data = validated_data.pop('phones')
-        guardians_data = validated_data.pop('guardians')
+        guardians_data = validated_data.pop('guardians') if 'guardians' in validated_data else []
 
         user = User.objects.create(**user_data)
         profile = Profile.objects.create(user=user, **validated_data)
@@ -36,7 +36,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         user_data = validated_data.pop('user')
         phones_data = validated_data.pop('phones')
-        guardians_data = validated_data.pop('guardians')
+        guardians_data = validated_data.pop('guardians') if 'guardians' in validated_data else []
         for field, value in user_data.items():
             setattr(instance.user, field, value)
         for field, value in validated_data.items():
