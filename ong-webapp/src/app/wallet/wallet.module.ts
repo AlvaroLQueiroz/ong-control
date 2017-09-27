@@ -16,8 +16,8 @@ import { WalletViewerComponent } from './wallet-viewer/wallet-viewer.component';
     CoreModule,
     FormsModule,
     MaterializeModule,
-    TransactionModule,
     WalletRoutingModule,
+    TransactionModule,
   ],
   declarations: [
     WalletListComponent,
