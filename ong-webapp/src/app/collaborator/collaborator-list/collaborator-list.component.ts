@@ -17,6 +17,19 @@ export class CollaboratorListComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   constructor(private activatedRoute: ActivatedRoute, private apiService: ApiService) {}
 
+  export_csv(){
+    this.apiService.get('exportCollaborators').toPromise().then(resp => {
+      var a = document.createElement('a');
+      var blob = new Blob([resp.text()], {type: resp.headers.get('content-type')});
+      var url = window.URL.createObjectURL(blob);
+      var now = new Date();
+      a.href = url;
+      a.download = `Colaboradores-${now.getDay()}-${now.getMonth()}-${now.getFullYear()}.csv`
+      a.click();
+      window.URL.revokeObjectURL(url);
+    })
+  }
+
   ngOnInit() {
     this.queryParamsSubscription = this.activatedRoute.queryParams.subscribe(params => {
       this.apiService

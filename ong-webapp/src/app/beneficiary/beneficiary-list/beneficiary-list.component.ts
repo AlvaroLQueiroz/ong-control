@@ -32,6 +32,19 @@ export class BeneficiaryListComponent implements OnInit, OnDestroy {
     });
   }
 
+  export_csv(){
+    this.apiService.get('exportBeneficiary').toPromise().then(resp => {
+      var a = document.createElement('a');
+      var blob = new Blob([resp.text()], {type: resp.headers.get('content-type')});
+      var url = window.URL.createObjectURL(blob);
+      var now = new Date();
+      a.href = url;
+      a.download = `Beneficiarios-${now.getDay()}-${now.getMonth()}-${now.getFullYear()}.csv`
+      a.click();
+      window.URL.revokeObjectURL(url);
+    })
+  }
+
   ngOnDestroy() {
     this.queryParamsSubscription.unsubscribe();
   }

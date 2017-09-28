@@ -33,12 +33,14 @@ export class ApiService {
       createWallet: () => '/wallets/',
       getWallet: (id: number) => `/wallets/${id}/`,
       updateWallet: (id: number) => `/wallets/${id}/`,
+      exportWallets: () => `/wallets/csv/`,
 
       // #################### TRANSACTIONS CATEGORY ###########
       listTransactionCategory: () => '/transaction-category/',
       createTransactionCategory: () => '/transaction-category/',
       getTransactionCategory: (id: number) => `/transaction-category/${id}/`,
       updateTransactionCategory: (id: number) => `/transaction-category/${id}/`,
+      exportTransactionsCategories: () => `/transaction-category/csv/`,
 
       // #################### TRANSACTIONS ####################
       listTransactions: () => '/transactions/',
@@ -55,12 +57,14 @@ export class ApiService {
       createCollaborator: () => '/collaborators/',
       getCollaborator: (id: number) => `/collaborators/${id}/`,
       updateCollaborator: (id: number) => `/collaborators/${id}/`,
+      exportCollaborators: () => `/collaborators/csv/`,
 
       // #################### BENEFICIARY ####################
       listBeneficiaries: () => '/profiles/',
       createBeneficiary: () => '/profiles/',
       getBeneficiary: (id: number) => `/profiles/${id}/`,
       updateBeneficiary: (id: number) => `/profiles/${id}/`,
+      exportBeneficiaries: () => `/profiles/csv/`,
     };
   }
 
@@ -79,9 +83,9 @@ export class ApiService {
 
   getToken(): string {
     const user = JSON.parse(localStorage.getItem('user') || '{}') as Profile;
-    if(user){
-      if(user.user){
-        if(user.user.auth_token){
+    if (user) {
+      if (user.user) {
+        if (user.user.auth_token) {
           return user.user.auth_token;
         }
         }

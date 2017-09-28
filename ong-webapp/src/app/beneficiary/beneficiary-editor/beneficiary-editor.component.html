@@ -72,7 +72,7 @@
           <div class="input-field col s12">
             <select multiple name="guardians" [(ngModel)]="beneficiary.guardians" materialize="material_select" [materializeSelectOptions]="guardians">
               <option value="" disabled>-----------------------------</option>
-              <option [value]="guardian?.user?.id" *ngFor="let guardian of beneficiaries">{{ guardian?.user?.first_name }} {{ guardian?.user?.last_name }}</option>
+              <option [ngValue]="guardian" *ngFor="let guardian of beneficiaries">{{ guardian?.user?.first_name }} {{ guardian?.user?.last_name }}</option>
             </select>
             <label>Responsáveis</label>
           </div>

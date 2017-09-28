@@ -55,6 +55,7 @@ export class BeneficiaryEditorComponent implements OnInit {
         .toPromise()
         .then(resp => {
           this.beneficiary = resp.json() as Beneficiary;
+          console.log(this.beneficiary)
           this.loading = false;
           setTimeout(function() {
             Materialize.updateTextFields();

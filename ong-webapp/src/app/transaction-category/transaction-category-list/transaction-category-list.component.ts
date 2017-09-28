@@ -15,11 +15,24 @@ export class TransactionCategoryListComponent implements OnInit {
   page: Page = null;
   queryParamsSubscription: Subscription = null;
 
-  constructor(private apiSerive: ApiService, private activatedRoute: ActivatedRoute) {}
+  constructor(private apiService: ApiService, private activatedRoute: ActivatedRoute) {}
+
+  export_csv(){
+    this.apiService.get('exportTransactionCategories').toPromise().then(resp => {
+      var a = document.createElement('a');
+      var blob = new Blob([resp.text()], {type: resp.headers.get('content-type')});
+      var url = window.URL.createObjectURL(blob);
+      var now = new Date();
+      a.href = url;
+      a.download = `Categorias-${now.getDay()}-${now.getMonth()}-${now.getFullYear()}.csv`
+      a.click();
+      window.URL.revokeObjectURL(url);
+    })
+  }
 
   ngOnInit() {
     this.queryParamsSubscription = this.activatedRoute.queryParams.subscribe(params => {
-      this.apiSerive
+      this.apiService
         .queryParams(params)
         .get('listTransactionCategory')
         .toPromise()

@@ -1,5 +1,5 @@
 <app-card sizes="s12">
-  <h1 class="card-title">Beneficiários</h1>
+  <h1 class="card-title">Beneficiários <span class="secondary-content pointer"><i class="material-icons left" (click)="export_csv()">cloud_download</i> <small><small>Download CSV</small></small> </span></h1>
   <div class="card-body">
     <div *ngIf="!loading; else errorBlock">
       <ul class="collection">
