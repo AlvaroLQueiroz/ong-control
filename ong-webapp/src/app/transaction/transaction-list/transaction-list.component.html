@@ -1,5 +1,5 @@
 <app-card [sizes]="'s12'">
-  <h2 class="card-title">Transações<i class="material-icons secondary-content pointer" (click)="export_csv()">cloud_download</i></h2>
+  <h2 class="card-title">Transações <span class="secondary-content pointer"><i class="material-icons left" (click)="export_csv()">cloud_download</i> <small><small>Download CSV</small></small> </span></h2>
   <div class="card-body">
     <ul class="collection">
       <li class="collection-item pointer" *ngFor="let transaction of transactions" [routerLink]="['/transactions', transaction.id, 'edit']">

@@ -83,8 +83,13 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
+DATE_INPUT_FORMATS = [
+    '%Y-%m-%d',      # '2006-10-25'
+    '%m/%d/%Y',      # '10/25/2006'
+    '%m/%d/%y',      # '10/25/06'
+    '%d/%m/%Y',      # '25/10/2006
+    '%d/%m/%y',      # '25/10/06
+]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 

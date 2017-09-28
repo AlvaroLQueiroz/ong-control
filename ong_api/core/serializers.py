@@ -52,7 +52,7 @@ class UserSerializer(serializers.ModelSerializer):
 class TelephoneCompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = TelephoneCompany
-        fields = ('id', 'label', 'brand')
+        fields = ('id', 'name')
 
 
 class PhoneSerializer(serializers.ModelSerializer):

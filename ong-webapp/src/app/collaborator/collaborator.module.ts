@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 import { CollaboratorListComponent } from './collaborator-list/collaborator-list.component';
 import { CollaboratorEditorComponent } from './collaborator-editor/collaborator-editor.component';
 import { CollaboratorViewerComponent } from './collaborator-viewer/collaborator-viewer.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   imports: [
-    CommonModule, CollaboratorRoutingModule, FormsModule, CoreModule, MaterializeModule
+    CommonModule, CollaboratorRoutingModule, FormsModule, CoreModule, MaterializeModule, TextMaskModule
   ],
   declarations: [CollaboratorListComponent, CollaboratorEditorComponent, CollaboratorViewerComponent]
 })

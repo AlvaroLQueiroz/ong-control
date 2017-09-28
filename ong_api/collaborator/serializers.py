@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 from django.contrib.auth.models import User
 
 from collaborator.models import Collaborator
@@ -37,12 +38,13 @@ class CollaboratorSerializer(serializers.ModelSerializer):
         try:
             instance.user.save()
             instance.save()
-            for phone_data in phones_data:
-                phone = Phone.objects.update_or_create(
-                    collaborator=instance, **phone_data)
-                if phone[1]:
-                    phone[0].save()
-        except:
+            # for phone_data in phones_data:
+            #     phone = Phone.objects.update_or_create(
+            #         collaborator=instance, **phone_data)
+            #     if phone[1]:
+            #         phone[0].save()
+        except Exception as e:
+            logging.warning(e)
             raise ValidationError(
                 {'user': {'username': ['Esse nome de usuário já está em uso.']}}, code='invalid')
         return instance

@@ -45,10 +45,10 @@ class ProfileSerializer(serializers.ModelSerializer):
             guardian = User.objects.get_or_create(**guardian_data)[0]
             guardian.save()
             instance.guardians.add(guardian)
-        for phone_data in phones_data:
-            phone = Phone.objects.get_or_create(**phone_data)[0]
-            phone.save()
-            instance.phones.add(phone)
+        # for phone_data in phones_data:
+        #     phone = Phone.objects.get_or_create(**phone_data)[0]
+        #     phone.save()
+        #     instance.phones.add(phone)
         instance.user.save()
         instance.save()
         return instance

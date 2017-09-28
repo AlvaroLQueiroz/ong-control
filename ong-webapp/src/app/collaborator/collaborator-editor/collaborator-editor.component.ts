@@ -7,6 +7,8 @@ import { Collaborator } from './../collaborator';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 declare var Materialize: any;
+declare var CPF: any;
+
 @Component({
   selector: 'app-collaborator-editor',
   templateUrl: './collaborator-editor.component.html',
@@ -17,6 +19,8 @@ export class CollaboratorEditorComponent implements OnInit {
   loading: boolean = true;
   materializeActions = new EventEmitter<string | MaterializeAction>();
   genres: any = null;
+  mask = null;
+  cpfError: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,14 +31,17 @@ export class CollaboratorEditorComponent implements OnInit {
   ) {
     this.collaborator = new Collaborator();
     this.collaborator.user = new User();
+    this.collaborator.user.is_active = true;
     this.collaborator.phones = [];
 
     this.collaborator.active = true;
     this.genres = [
       { id: null, label: '--------' },
-      { id: 1, label: 'Mulher' },
-      { id: 2, label: 'Homem' }
+      { id: 1, label: 'Feminino' },
+      { id: 2, label: 'Masculino' }
     ];
+
+    this.mask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
   }
 
   ngOnInit() {
@@ -47,9 +54,10 @@ export class CollaboratorEditorComponent implements OnInit {
         .then(resp => {
           this.collaborator = resp.json() as Collaborator;
           this.loading = false;
+          console.log(this.collaborator.cpf)
           setTimeout(function() {
             Materialize.updateTextFields();
-          }, 300);
+          }, 500);
         });
     } else {
       this.loading = false;
@@ -97,6 +105,26 @@ export class CollaboratorEditorComponent implements OnInit {
             this.collaborator.uf = response.uf;
           }
         });
+    }
+  }
+
+  public cpfMask() {
+    const value = this.collaborator.cpf;
+    if (value.length === 3) {
+      this.collaborator.cpf = value + '.';
+    }
+    if (value.length === 7) {
+      this.collaborator.cpf = value + '.';
+    }
+    if (value.length === 11) {
+      this.collaborator.cpf = value + '-';
+    }
+  }
+  validateCPF() {
+    if (CPF.validate(this.collaborator.cpf) === true) {
+      this.cpfError = false;
+    }else {
+      this.cpfError = true;
     }
   }
 }

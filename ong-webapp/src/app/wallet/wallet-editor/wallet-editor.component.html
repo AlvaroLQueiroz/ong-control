@@ -4,6 +4,11 @@
     <div class="row">
       <form #wForm class="col s12" #walletForm="ngForm" materialize (ngSubmit)="submit()">
         <div class="row">
+          <div class="col s12 red-text">
+            <small>* campo obrigatório</small>
+          </div>
+        </div>
+        <div class="row">
           <div class="switch center-align">
             <label>
               Desabilitada
@@ -26,7 +31,7 @@
         <div class="row">
           <div class="input-field col s12">
             <input id="label" type="text" required name="label" [(ngModel)]="wallet.label">
-            <label for="label">Nome</label>
+            <label for="label">Nome*</label>
           </div>
         </div>
         <div class="row">

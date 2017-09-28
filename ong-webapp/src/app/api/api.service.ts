@@ -1,3 +1,4 @@
+import { Profile } from './profile';
 import { environment } from './../../environments/environment';
 import { User, Login } from './user';
 import { Observable } from 'rxjs/Rx';
@@ -77,12 +78,19 @@ export class ApiService {
   }
 
   getToken(): string {
-    const user = JSON.parse(localStorage.getItem('user') || '{}') as User;
-    return user ? user.auth_token : '';
+    const user = JSON.parse(localStorage.getItem('user') || '{}') as Profile;
+    if(user){
+      if(user.user){
+        if(user.user.auth_token){
+          return user.user.auth_token;
+        }
+        }
+    }
+    return '';
   }
 
-  getUser(): User {
-    return JSON.parse(localStorage.getItem('user') || '{}') as User;
+  getUser(): Profile {
+    return JSON.parse(localStorage.getItem('user') || '{}') as Profile;
   }
 
   logout(): void {

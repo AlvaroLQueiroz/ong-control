@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { BeneficiaryEditorComponent } from './beneficiary-editor/beneficiary-editor.component';
 import { BeneficiaryViewerComponent } from './beneficiary-viewer/beneficiary-viewer.component';
 import { BeneficiaryListComponent } from './beneficiary-list/beneficiary-list.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { BeneficiaryListComponent } from './beneficiary-list/beneficiary-list.co
     BeneficiaryRoutingModule,
     FormsModule,
     CoreModule,
-    MaterializeModule
+    MaterializeModule,
+    TextMaskModule
   ],
   declarations: [BeneficiaryEditorComponent, BeneficiaryViewerComponent, BeneficiaryListComponent]
 })

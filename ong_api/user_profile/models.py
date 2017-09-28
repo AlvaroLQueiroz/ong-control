@@ -16,7 +16,7 @@ class Profile(models.Model):
 
     cep = models.CharField(max_length=10)
     logradouro = models.CharField(max_length=255)
-    complemento = models.CharField(max_length=128)
+    complemento = models.CharField(max_length=128, null=True, blank=True)
     bairro = models.CharField(max_length=128)
     localidade = models.CharField(max_length=128)
     uf = models.CharField(max_length=8)

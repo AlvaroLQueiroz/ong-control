@@ -1,6 +1,6 @@
 from django.db import models
 from core.models import Phone
-
+from django.conf import settings
 FEMALE = 1
 MALE = 2
 
@@ -22,7 +22,7 @@ class Collaborator(models.Model):
 
     cep = models.CharField(max_length=10)
     logradouro = models.CharField(max_length=255)
-    complemento = models.CharField(max_length=128)
+    complemento = models.CharField(max_length=128, blank=True, null=True)
     bairro = models.CharField(max_length=128)
     localidade = models.CharField(max_length=128)
     uf = models.CharField(max_length=8)

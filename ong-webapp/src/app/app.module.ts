@@ -20,7 +20,7 @@ import { HomeComponent } from './core/home/home.component';
     AuthModule,
     BrowserModule,
     CoreModule,
-    BeneficiaryModule
+    BeneficiaryModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

@@ -4,17 +4,74 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$36000$rE47uBg7CTvH$p69Asr9E6dJ3jo3oQttzhVjGHOPF6cwkg+hbqvatYn0=",
-    "last_login": null,
+    "last_login": "2017-09-28T00:49:32Z",
     "is_superuser": true,
     "username": "admin",
-    "first_name": "",
+    "first_name": "admin",
     "last_name": "",
     "email": "admin@gmail.com",
     "is_staff": true,
     "is_active": true,
-    "date_joined": "2017-06-29T01:18:42.296Z",
+    "date_joined": "2017-06-29T01:18:42Z",
     "groups": [],
     "user_permissions": []
+  }
+},
+{
+  "model": "collaborator.collaborator",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "active": true,
+    "cpf": "03200637129",
+    "rg": "001779212",
+    "birth_date": "1993-06-19",
+    "genre": "2",
+    "cep": "79830200",
+    "logradouro": "Rua Isidoro Pedroso",
+    "complemento": null,
+    "bairro": "Vila Alba",
+    "localidade": "dourados",
+    "uf": "ms",
+    "phones": [
+      1
+    ]
+  }
+},
+{
+  "model": "core.telephonecompany",
+  "pk": 1,
+  "fields": {
+    "name": "Vivo"
+  }
+},
+{
+  "model": "core.telephonecompany",
+  "pk": 2,
+  "fields": {
+    "name": "Tim"
+  }
+},
+{
+  "model": "core.telephonecompany",
+  "pk": 3,
+  "fields": {
+    "name": "Oi"
+  }
+},
+{
+  "model": "core.telephonecompany",
+  "pk": 4,
+  "fields": {
+    "name": "Claro"
+  }
+},
+{
+  "model": "core.phone",
+  "pk": 1,
+  "fields": {
+    "company": 4,
+    "number": "1231312312312"
   }
 }
 ]

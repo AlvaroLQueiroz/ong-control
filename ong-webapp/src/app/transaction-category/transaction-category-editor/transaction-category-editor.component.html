@@ -4,6 +4,11 @@
     <div class="row">
       <form class="col s12" #transactionCategoryForm="ngForm" materialize (ngSubmit)="submit()">
         <div class="row">
+          <div class="col s12 red-text">
+            <small>* campo obrigatório</small>
+          </div>
+        </div>
+        <div class="row">
           <div class="switch center-align">
             <label>
                 Desabilitada
@@ -14,7 +19,7 @@
           </div>
         </div>
         <div class="row">
-          <h6>Tipo de transação</h6>
+          <h6>Tipo de transação*</h6>
           <p>
             <input id="type1" type="radio" class="with-gap" name="transaction_type" [value]="1" [(ngModel)]="transactionCategory.transaction_type"
             />
@@ -29,7 +34,7 @@
         <div class="row">
           <div class="input-field col s12">
             <input id="label" type="text" required name="label" [(ngModel)]="transactionCategory.label">
-            <label for="label">Nome</label>
+            <label for="label">Nome*</label>
           </div>
         </div>
         <div class="row">
